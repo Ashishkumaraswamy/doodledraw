@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import django_heroku
 from pathlib import Path
 import os
-import whitenoise
+# import whitenoise
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-kb08zaxc2z9td2@-ilbt3^ky6dc0**+ao(lyvtlper+l$4=t3!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['doodledrawarmy.herokuapp.com', 'http://127.0.0.1:8000/']
+ALLOWED_HOSTS = ['http://127.0.0.1:8000/']
 
 
 # Application definition
