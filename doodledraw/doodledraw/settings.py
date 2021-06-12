@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-kb08zaxc2z9td2@-ilbt3^ky6dc0**+ao(lyvtlper+l$4=t3!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['http://127.0.0.1:8000/']
+ALLOWED_HOSTS = ['http://127.0.0.1:8000/', 'doodledrawarmy.herokuapp.com']
 
 
 # Application definition
