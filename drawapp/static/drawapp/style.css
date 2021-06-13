@@ -18,37 +18,161 @@
 }
 
 .first h1 {
-  font-size: 100px;
+  font-size: 120px;
   padding-top: 100px;
 }
 
 .header {
-  position: fixed;
-  width: 100vw;
-  height: 15vh;
   display: flex;
+  width: 100%;
+  height: 10%;
+  background: transparent;
+  position: relative;
+  justify-content: space-around;
 }
 
 .icon1 {
-  padding: 10px;
-  position: fixed;
-  right: 0;
-  width: 15px;
-  height: 15px;
-  flex-basis: 10%;
-  border-radius: 50%;
+  position: absolute;
+  right: 10%;
+  width: 50px;
+  height: 50px;
   background: transparent;
-  overflow: hidden;
+  border-radius: 50%;
+  z-index: 2;
+  margin: 15px auto;
 }
 
-.icon1 img {
-  width: 15px;
-  height: 15px;
+.icon-img {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 
-@media screen and (max-width: 700px) {
-  .window {
-    min-width: 700px;
-    width: 700px;
-  }
+.icon2 {
+  position: absolute;
+  right: 5%;
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border-radius: 50%;
+  z-index: 2;
+  margin: 15px auto;
+}
+
+a::after {
+  content: "";
+  width: 0%;
+  height: 2px;
+  background: #f44336;
+  display: block;
+  margin: auto;
+  transition: 0.5s;
+}
+
+a:hover::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background: #f44336;
+  display: block;
+  margin: auto;
+}
+
+.info {
+  position: relative;
+  top: 10%;
+  width: 100%;
+  background: transparent;
+  display: flex;
+}
+
+.game_name {
+  flex-basis: 40%;
+  margin: 100px;
+  margin-left: 200px;
+  justify-content: space-between;
+}
+
+.first-line {
+  font-family: "Just Another Hand", cursive;
+  font-size: 100px;
+  font-weight: 50px;
+  text-align: left;
+  color: white;
+}
+
+.second-line {
+  position: relative;
+  font-family: "Just Another Hand", cursive;
+  font-size: 100px;
+  font-weight: 50px;
+  left: 250px;
+  color: rgb(250, 246, 1);
+}
+
+.description {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  top: 120px;
+  flex-basis: 50%;
+}
+
+.options {
+  display: flex;
+}
+
+.description h2 {
+  margin-left: 50px;
+  font-family: "Staatliches", cursive;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+.description h2::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background: #f44336;
+  display: block;
+  margin: auto;
+}
+
+.details {
+  position: relative;
+  box-sizing: border-box;
+  top: 40px;
+  width: 60%;
+  margin: 10px;
+  left: 40px;
+}
+
+.details p {
+  text-indent: 50px;
+  font-family: "Merriweather", serif;
+  font-size: 20px;
+  color: white;
+}
+
+.play {
+  position: relative;
+  top: 70px;
+  width: 100%;
+  height: 50px;
+  text-align: center;
+}
+
+.playbtn {
+  width: 150px;
+  height: 50px;
+  background: rgb(250, 246, 1);
+  box-shadow: 1px 2px black;
+}
+
+.playbtn h2 {
+  font-family: "Staatliches", cursive;
+  font-size: 30px;
+  color: rgba(4, 9, 30, 0.7);
 }

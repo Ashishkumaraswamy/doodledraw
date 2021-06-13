@@ -4,19 +4,48 @@
     <head>
         <meta name="viewport" content="width=device-width height=device-height">
         <link href="{%static 'drawapp/style.css' %}" rel="stylesheet" >
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&family=Merriweather:wght@300&family=Staatliches&display=swap" rel="stylesheet">
         <title></title>
     </head>
     <body>
         <section class="window">
             <div class="header">
-                <div class="icon-1">
-                    <!-- <img src="{%static 'drawapp/github.png' %}" alt=""> -->
+                <div class="icon1">
+                   <a href="https://github.com/Ashishkumaraswamy/doodledraw"><img src="{%static 'drawapp/github.png' %}" alt="" class="icon-img"></a>
                 </div>
                 <div class="icon2">
-
+                    <a href="https://socialnetworkatwork.herokuapp.com/"><img src="{%static 'drawapp/logoicon.ico' %}" alt="" class="icon-img" style="border: 2px solid black;"></a>
                 </div>
             </div>
+            <div class="info">
+                <div class="game_name">
+                    <h1 class=first-line>YOU DRAW</h1><br><h1 class="second-line">WE GUESS</h1>
+                </div>
+                <div class="description">
+                    <div class="options">
+                        <h2 id="home">Home</h2><h2 id="desc">Description<h2 id="about">About us</h2>
+                    </div>
+                    <div class="details" id="details">
+                        <p>Welcome To the new world of AI...<br>The game guesses the iamge that you draw and awards points simultaneously for correct responses</p>
+                    </div>
+                </div>
+            </div>
+            <div class="play">
+                <button class="playbtn"><h2>Let's Play</h2></button>
+            </div>
         </section>
-
+        </section>
     </body>
+    <script>
+        document.getElementById("desc").onclick=()=>{
+            document.getElementById("details").innerHTML="<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec vestibulum metus. Mauris eu pellentesque magna. Aenean at quam purus. Pellentesque volutpat leo ut venenatis consequat. Aenean ac est cursus, bibendum sapien sit amet, dapibus enim. Aliquam feugiat maximus lectus, nec sagittis sapien finibus eget. Nulla suscipit enim vitae finibus maximus. Morbi scelerisque laoreet ex. Sed in egestas justo, nec ultrices velit.</p>"
+        }
+        document.getElementById("about").onclick=()=>{
+            document.getElementById("details").innerHTML="<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec vestibulum metus. Mauris eu pellentesque magna. Aenean at quam purus. Pellentesque volutpat leo ut venenatis consequat. Aenean ac est cursus, bibendum sapien sit amet, dapibus enim. Aliquam feugiat maximus lectus, nec sagittis sapien finibus eget. Nulla suscipit enim vitae finibus maximus. Morbi scelerisque laoreet ex. Sed in egestas justo, nec ultrices velit.</p>"
+        }
+        document.getElementById("home").onclick=()=>{
+            document.getElementById("details").innerHTML="<p>Welcome To the new world of AI...<br>The game guesses the iamge that you draw and awards points simultaneously for correct responses</p>"
+        }
+    </script>
 </html>
