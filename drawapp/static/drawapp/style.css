@@ -19,7 +19,6 @@
 
 .first h1 {
   font-size: 120px;
-  padding-top: 100px;
 }
 
 .header {
@@ -79,9 +78,20 @@ a:hover::after {
   margin: auto;
 }
 
+@media only screen and(max-height:900px) {
+  .info {
+    top: 10%;
+  }
+}
+
+@media only screen and(max-height:600px) {
+  .info {
+    top: 5%;
+  }
+}
+
 .info {
   position: relative;
-  top: 10%;
   width: 100%;
   background: transparent;
   display: flex;
@@ -89,8 +99,8 @@ a:hover::after {
 
 .game_name {
   flex-basis: 40%;
-  margin: 100px;
-  margin-left: 200px;
+  margin: 5%;
+  margin-left: 10%;
   justify-content: space-between;
 }
 
@@ -156,11 +166,22 @@ a:hover::after {
   color: white;
 }
 
+@media only screen and(max-height:900px) {
+  .play {
+    top: 10%;
+  }
+}
+
+@media only screen and(max-height:600px) {
+  .play {
+    top: 5%;
+  }
+}
+
 .play {
   position: relative;
-  top: 70px;
   width: 100%;
-  height: 50px;
+  height: 2%;
   text-align: center;
 }
 
@@ -168,7 +189,7 @@ a:hover::after {
   width: 150px;
   height: 50px;
   background: rgb(250, 246, 1);
-  box-shadow: 1px 2px black;
+  box-shadow: 3px 3px rgb(250, 246, 1);
 }
 
 .playbtn h2 {
