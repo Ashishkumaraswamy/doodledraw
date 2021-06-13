@@ -23,11 +23,9 @@
                 <i class="fa fa-close" style="font-size:25px"></i>
             </div>
         </div>
-        <div class="body_item" id="body_item">
-            <canvas id="canvas">
+        <canvas id="canvas">
                 
-            </canvas>
-        </div>
+        </canvas>
         <div class="text_item"></div>
     </section>
     </body>
@@ -36,9 +34,9 @@
         {
             const canvas = document.querySelector('#canvas');
             const ctx =  canvas.getContext("2d");
-            var width=document.getElementById("body_item").offsetWidth;
-            var height=document.getElementById("body_item").offsetHeight;
-            canvas.height = height+10;
+            var width=document.getElementById("canvas").offsetWidth;
+            var height=document.getElementById("canvas").offsetHeight;
+            canvas.height = height;
             canvas.width = width;
             alert(width+" "+height);
             // ctx.beginPath();
