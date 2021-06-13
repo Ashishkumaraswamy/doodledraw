@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link href="{%static 'drawapp/mainpage.css' %}" rel="stylesheet" >
         <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Exo:wght@600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Exo:wght@600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>Game</title>
     </head>
@@ -23,24 +23,59 @@
                 <i class="fa fa-close" style="font-size:25px"></i>
             </div>
         </div>
-        <div class="body_item" id="body_item">
-            <canvas id="canvas">
+        <canvas id="canvas">
                 
-            </canvas>
-        </div>
+        </canvas>
+       
         <div class="text_item"></div>
     </section>
     </body>
     <script>
     window.addEventListener('load',()=>
         {
+            // const canvas = document.querySelector('#canvas');
+            // const ctx =  canvas.getContext("2d");
+            // var width=document.getElementById("body_item").offsetWidth;
+            // var height=document.getElementById("body_item").offsetHeight;
+            // canvas.height = height+10;
+            // canvas.width = width;
+            // alert(width+" "+height);
+            // // ctx.beginPath();
+            // // ctx.moveTo(100,100);
+            // // ctx.lineTo(200,100);
+            // // ctx.stroke();
+            // var painting = false;
+
+            // function startpos(){
+            //     painting = true;
+            // }
+            // function endpos(){
+            //     painting = false;
+            //     ctx.beginPath();
+            // }  
+            // function draw(e){
+            //     if(!painting) return;
+
+            //     ctx.lineWidth = 10;
+            //     ctx.lineCap = "round";
+
+            //     ctx.lineTo(e.clientX,e.clientY);
+            //     ctx.stroke();
+            //     ctx.beginPath();
+            //     ctx.moveTo(e.clientX,e.clientY);
+            // }
+
+
+            // canvas.addEventListener("mousedown",startpos);
+            // canvas.addEventListener("mouseup",endpos);
+            // canvas.addEventListener("mousemove",draw);
+            
             const canvas = document.querySelector('#canvas');
             const ctx =  canvas.getContext("2d");
-            var width=document.getElementById("body_item").offsetWidth;
-            var height=document.getElementById("body_item").offsetHeight;
-            canvas.height = height+10;
-            canvas.width = width;
-            alert(width+" "+height);
+
+            canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth;
+            
             // ctx.beginPath();
             // ctx.moveTo(100,100);
             // ctx.lineTo(200,100);
@@ -63,7 +98,7 @@
                 ctx.lineTo(e.clientX,e.clientY);
                 ctx.stroke();
                 ctx.beginPath();
-                ctx.moveTo(e.clientX,e.clientY);
+                ctx.moveTo(e.clientX,e.clientY)
             }
 
 
