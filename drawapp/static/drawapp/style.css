@@ -78,20 +78,9 @@ a:hover::after {
   margin: auto;
 }
 
-@media only screen and (max-height: 900px) {
-  .info {
-    top: 100px;
-  }
-}
-
-@media only screen and (max-height: 600px) {
-  .info {
-    top: 0;
-  }
-}
-
 .info {
   position: relative;
+  top: 10%;
   width: 100%;
   background: transparent;
   display: flex;
@@ -99,9 +88,8 @@ a:hover::after {
 
 .game_name {
   flex-basis: 40%;
-  margin: 5%;
-  margin-left: 10%;
-  justify-content: space-between;
+  margin-top: 100px;
+  margin-left: 200px;
 }
 
 .first-line {
@@ -134,7 +122,7 @@ a:hover::after {
 }
 
 .description h2 {
-  margin-left: 50px;
+  margin-left: 70px;
   font-family: "Staatliches", cursive;
   font-size: 30px;
   color: white;
@@ -154,7 +142,7 @@ a:hover::after {
   position: relative;
   box-sizing: border-box;
   top: 40px;
-  width: 60%;
+  width: 65%;
   margin: 10px;
   left: 40px;
 }
@@ -168,50 +156,75 @@ a:hover::after {
 
 .play {
   position: relative;
+  top: 200px;
   width: 100%;
-  height: 2%;
+  height: 50px;
   text-align: center;
 }
-
-/* @media screen and(max-height:900px) {
-  .play {
-    background: white;
-  }
-}
-
-@media screen and(max-height:600px) {
-  .play {
-    background: black;
-  }
-} */
-
-@media only screen and (max-height: 900px) {
-  .play {
-    top: 100px;
-  }
-}
-
-@media only screen and (max-height: 600px) {
-  .play {
-    top: 0;
-  }
-}
-
-/* @media only screen and (max-width: 600px) {
-  .play {
-    top: 100px;
-  }
-} */
 
 .playbtn {
   width: 150px;
   height: 50px;
   background: rgb(250, 246, 1);
-  box-shadow: 3px 3px rgb(250, 246, 1);
+  box-shadow: 1px 2px black;
 }
 
 .playbtn h2 {
   font-family: "Staatliches", cursive;
   font-size: 30px;
   color: rgba(4, 9, 30, 0.7);
+}
+
+@media only screen and (max-height: 800px) {
+  .info {
+    top: 0%;
+  }
+  .first-line {
+    font-size: 90px;
+  }
+  .second-line {
+    left: 100px;
+    font-size: 90px;
+  }
+  .play {
+    top: 50px;
+  }
+  .game_name {
+    margin-left: 50px;
+  }
+}
+
+@media only screen and (max-width: 1000px) and (min-height: 700px) {
+  .info {
+    top: 50px;
+  }
+  .first-line {
+    font-size: 60px;
+  }
+  .second-line {
+    left: 100px;
+    font-size: 60px;
+  }
+  .play {
+    top: 300px;
+  }
+  .game_name {
+    margin-left: 100px;
+  }
+  .description h2 {
+    font-size: 25px;
+  }
+
+  .icon1 {
+    width: 40px;
+    height: 40px;
+  }
+  .icon-img {
+    width: 40px;
+    height: 40px;
+  }
+  .icon2 {
+    width: 40px;
+    height: 40px;
+  }
 }
