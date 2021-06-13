@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="play">
-                <button class="playbtn"><h2>Let's Play</h2></button>
+                <button class="playbtn" id="playbtn"><h2>Let's Play</h2></button>
             </div>
         </section>
         </section>
@@ -46,6 +46,10 @@
         }
         document.getElementById("home").onclick=()=>{
             document.getElementById("details").innerHTML="<p>Welcome To the new world of AI...<br>The game guesses the iamge that you draw and awards points simultaneously for correct responses</p>"
+        }
+        document.getElementById("playbtn").onclick=()=>{
+            console.log('click')
+            location.href="{%url 'game' %}"
         }
     </script>
 </html>
