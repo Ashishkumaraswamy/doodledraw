@@ -20,9 +20,6 @@
         </div>
 <!-- 
         try commenting this run that da -->
-        
-  
-        <section class="window">
         <div class="header_item">
             <h1 id="question">DRAW:</h1>
             <div class="timer"> 
@@ -32,25 +29,15 @@
                 <i class="fa fa-pause"></i>
                 <i class="fa fa-close" style="font-size:25px"></i>
             </div>
-        </div>
-
-        <!-- <div class="body_item">
-            <canvas id="canvas" resize="true">
-                
-            </canvas>
-        </div>
-        -->
-
-       
+        </div>       
         <div class="text_item"></div>
-      
-   
-    </section>
     
    
     </body>
     <script>
     const canvas = document.querySelector('#canvas');
+    canvas.setAttribute('width', canvas.parentNode.offsetWidth);
+    canvas.setAttribute('height', canvas.parentNode.offsetHeight);
     var ctx = canvas.getContext('2d');
     resize();
 
