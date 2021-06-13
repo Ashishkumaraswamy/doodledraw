@@ -194,7 +194,7 @@ a:hover::after {
   }
 }
 
-@media only screen and (min-width: 900px) and (min-height: 700px) {
+@media only screen and (max-width: 1000px) and (min-height: 700px) {
   .info {
     top: 50px;
   }
