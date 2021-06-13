@@ -78,15 +78,15 @@ a:hover::after {
   margin: auto;
 }
 
-@media only screen and(max-height:900px) {
+@media only screen and (max-height: 900px) {
   .info {
-    top: 10%;
+    top: 100px;
   }
 }
 
-@media only screen and(max-height:600px) {
+@media only screen and (max-height: 600px) {
   .info {
-    top: 5%;
+    top: 0;
   }
 }
 
@@ -166,24 +166,42 @@ a:hover::after {
   color: white;
 }
 
-@media only screen and(max-height:900px) {
-  .play {
-    top: 10%;
-  }
-}
-
-@media only screen and(max-height:600px) {
-  .play {
-    top: 5%;
-  }
-}
-
 .play {
   position: relative;
   width: 100%;
   height: 2%;
   text-align: center;
 }
+
+/* @media screen and(max-height:900px) {
+  .play {
+    background: white;
+  }
+}
+
+@media screen and(max-height:600px) {
+  .play {
+    background: black;
+  }
+} */
+
+@media only screen and (max-height: 900px) {
+  .play {
+    top: 100px;
+  }
+}
+
+@media only screen and (max-height: 600px) {
+  .play {
+    top: 0;
+  }
+}
+
+/* @media only screen and (max-width: 600px) {
+  .play {
+    top: 100px;
+  }
+} */
 
 .playbtn {
   width: 150px;
