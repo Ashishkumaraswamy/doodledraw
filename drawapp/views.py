@@ -5,3 +5,6 @@ from django.http import HttpResponse
 
 def index(request):
     return render(request, "home.html")
+
+def game(request):
+    return render(request, "mainpage.html")

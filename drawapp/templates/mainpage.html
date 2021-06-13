@@ -1,0 +1,64 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link href="{%static 'drawapp/mainpage.css' %}" rel="stylesheet" >
+        <title>Game</title>
+    </head>
+    <body>
+        <div class="header_item">
+        </div>
+        <div class="body_item">
+            <canvas id="canvas">
+
+            </canvas>
+        </div>
+        <div class="text_item"></div>
+    </body>
+    <script>
+        window.addEventListener('load',()=>
+        {
+            const canvas = document.querySelector('#canvas');
+            const ctx =  canvas.getContext("2d");
+
+            canvas.height = window.innerHeight-10;
+            canvas.width = window.innerWidth;
+            
+            // ctx.beginPath();
+            // ctx.moveTo(100,100);
+            // ctx.lineTo(200,100);
+            // ctx.stroke();
+            var painting = false;
+
+            function startpos(){
+                painting = true;
+            }
+            function endpos(){
+                painting = false;
+                ctx.beginPath();
+            }  
+            function draw(e){
+                if(!painting) return;
+
+                ctx.lineWidth = 10;
+                ctx.lineCap = "round";
+
+                ctx.lineTo(e.clientX,e.clientY);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(e.clientX,e.clientY)
+            }
+
+
+            canvas.addEventListener("mousedown",startpos);
+            canvas.addEventListener("mouseup",endpos);
+            canvas.addEventListener("mousemove",draw);
+            
+
+        })
+
+    </script>
+</html>
