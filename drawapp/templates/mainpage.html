@@ -9,6 +9,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Exo:wght@600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&family=Merriweather:wght@300&family=Staatliches&display=swap" rel="stylesheet">
         <title>Game</title>
     </head>
     <body>
@@ -22,15 +23,20 @@
         try commenting this run that da -->
         <div class="header_item">
             <h1 id="question">DRAW:</h1>
-            <div class="timer"> 
+            <div class="timer" id="timer"> 
                 <h1>00:00</h1>
             </div>
             <div class="icon">
-                <i class="fa fa-pause"></i>
+                <i class='fa fa-eraser' id="eraser" style='font-size:25px'></i>
+                <i class="fa fa-pause" ></i>
                 <i class="fa fa-close" style="font-size:25px"></i>
             </div>
         </div>       
-        <div class="text_item"></div>
+        <div class="text_item">
+            <div class="guessbox">
+                <p>I guess aeroplane<p>
+            </div>
+        </div>
     
    
     </body>
@@ -77,6 +83,29 @@
     ctx.stroke(); // draw it!
     }
     
+    var timer=40
+    var x=setInterval(function(){
+        if (timer>=10){
+            document.getElementById("timer").innerHTML="<h1>00:"+timer+"</h1>";
+        }
+        else
+        {
+            document.getElementById("timer").innerHTML="<h1>00:0"+timer+"</h1>";
+        }
+        timer=timer-1
+        if(timer<0)
+        {
+            clearInterval(x);
+            document.getElementById("timer").innerHTML="<h1>TIME UP!</h1>";
+        }
+    }
+    ,1000)
+
+    document.getElementById("eraser").onclick=()=>{
+        context=canvas.getContext('2d');
+        context.clearRect(0,0,canvas.width,canvas.height);
+    }
+
 
     </script>
 </html>
