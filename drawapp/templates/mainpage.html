@@ -14,11 +14,16 @@
     </head>
     <body>
         
-        <div class="body_item">
-            <canvas id="canvas" resize="true">
-                
-            </canvas>
-        </div>
+        <form method="POST" id="form1">
+            {% csrf_token %}
+            <div class="body_item">
+                <canvas id="canvas" resize="true">
+                    
+                </canvas>
+            </div>
+            <input type="hidden" name="captured_image" id="captured_image">
+            <!-- <input id="upload_image"  type="submit" onclick="save()" value="Upload the image"> -->
+        </form>
 <!-- 
         try commenting this run that da -->
         <div class="header_item">
@@ -53,7 +58,11 @@
     window.addEventListener('resize', resize);
     document.addEventListener('mousemove', draw);
     document.addEventListener('mousedown', setPosition);
-    document.addEventListener('mouseenter', setPosition);
+    document.addEventListener('mouseup', save);
+    
+    document.addEventListener('ontouchmove', draw);
+    document.addEventListener('ontouchstart', setPosition);
+    document.addEventListener('ontouchend', save);
 
     // new position from mouse event
     function setPosition(e) {
@@ -65,6 +74,8 @@
     function resize() {
     ctx.canvas.width = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     }
 
     function draw(e) {
@@ -82,8 +93,20 @@
     ctx.lineTo(pos.x, pos.y); // to
     ctx.stroke(); // draw it!
     }
-    
-    var timer=40
+
+    function save(e){
+        pos.x = e.clientX;
+        pos.y = e.clientY;
+        e.preventDefault();
+        var form=document.getElementById('form1');
+        document.getElementById('captured_image').value = canvas.toDataURL('image/png');
+        form.submit(function(e)
+        {
+            e.preventDefault();
+        });
+    }
+
+    var timer=10;
     var x=setInterval(function(){
         if (timer>=10){
             document.getElementById("timer").innerHTML="<h1>00:"+timer+"</h1>";
@@ -105,7 +128,6 @@
         context=canvas.getContext('2d');
         context.clearRect(0,0,canvas.width,canvas.height);
     }
-
 
     </script>
 </html>
