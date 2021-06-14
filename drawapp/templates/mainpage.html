@@ -60,9 +60,9 @@
     document.addEventListener('mousedown', setPosition);
     document.addEventListener('mouseup', save);
     
-    document.addEventListener('ontouchmove', draw);
-    document.addEventListener('ontouchstart', setPosition);
-    document.addEventListener('ontouchend', save);
+    document.addEventListener('touchmove', draw);
+    document.addEventListener('touchstart', setPosition);
+    document.addEventListener('touchend', save);
 
     // new position from mouse event
     function setPosition(e) {
