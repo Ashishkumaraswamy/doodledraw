@@ -13,10 +13,13 @@
         <title>Game</title>
     </head>
     <body>
-        
+        <div class="popup" id="popup" style="background:#ffd139;width:100%;height:100%;position:relative">
+            <h1>Here</h1>
+        </div>
+
         <form id="form1">
             {% csrf_token %}
-            <div class="body_item">
+            <div class="body_item" id="body_item">
                 <canvas id="canvas" resize="true">
                     
                 </canvas>
@@ -24,10 +27,10 @@
             <input type="hidden" name="captured_image" id="captured_image">
             <!-- <input id="upload_image"  type="submit" onclick="save()" value="Upload the image"> -->
         </form>
-<!-- 
+        <!-- 
         try commenting this run that da -->
-        <div class="header_item">
-            <h1 id="question">DRAW:</h1>
+        <div class="header_item" id="header_item">
+            <h1 id="question">DRAW : {{imgques}}</h1>
             <div class="timer" id="timer"> 
                 <h1>00:00</h1>
             </div>
@@ -37,18 +40,16 @@
                 <i class="fa fa-close" style="font-size:25px"></i>
             </div>
         </div>       
-        <div class="text_item">
-            <div class="guessbox">
-                <p>I guess aeroplane<p>
+        <div class="text_item" id="text_item">
+            <div class="guessbox" id="guessbox">
+            <p>I guess aeroplane<p>
             </div>
         </div>
-    
-   
+        
     </body>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script>
-    
     var timer=10;
     const canvas = document.querySelector('#canvas');
     canvas.setAttribute('width', canvas.parentNode.offsetWidth);
@@ -123,6 +124,11 @@
             document.getElementById("timer").innerHTML="<h1>TIME UP!</h1>";
             // localStorage.setItem('image',"");
             // localStorage.setItem('timer',10);
+            setTimeout("",1000);
+            document.getElementById("header_item").style.display="none";
+            document.getElementById("body_item").style.display="none";
+            document.getElementById("text_item").style.display="none";
+            document.getElementById("popup").style.display="block";
         }
         $("form1").submit(function(){
         alert("Submitted");
@@ -136,8 +142,9 @@
                 canvas_data:$("#captured_image").val(),
                 csrfmiddlewaretoken: '{{ csrf_token }}'
             },
-            success:function(){
-    
+            success:function(text){
+                console.log(text);
+                document.getElementById("guessbox").innerHTML="<p>I guess"+text+"<p>";
             }
         })
     
