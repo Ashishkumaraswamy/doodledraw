@@ -122,7 +122,7 @@ a:hover::after {
 }
 
 .description h2 {
-  margin-left: 70px;
+  margin-left: 50px;
   font-family: "Staatliches", cursive;
   font-size: 30px;
   color: white;
@@ -194,7 +194,7 @@ a:hover::after {
   }
 }
 
-@media only screen and (max-width: 1000px) and (min-height: 700px) {
+@media only screen and (max-width: 1100px) and (min-height: 700px) {
   .info {
     top: 50px;
   }
@@ -212,6 +212,7 @@ a:hover::after {
     margin-left: 100px;
   }
   .description h2 {
+    margin-left: 0px;
     font-size: 25px;
   }
 
