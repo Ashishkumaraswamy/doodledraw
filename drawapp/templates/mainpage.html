@@ -108,7 +108,7 @@
     
     var form=document.getElementById('form1');
 
-    var x=setInterval(function(){
+    var x=setInterval(function(e){
         if (timer>=10){
             document.getElementById("timer").innerHTML="<h1>00:"+timer+"</h1>";
         }
@@ -124,24 +124,23 @@
             // localStorage.setItem('image',"");
             // localStorage.setItem('timer',10);
         }
-        form=document.getElementById("form1");
-        form.submit(e)
-        {
-            alert('here');
-            e.preventDefault();
-            document.getElementById('captured_image').value = canvas.toDataURL('image/png');
-            $.ajax({
-                type:'POST',
-                url:'/input',
-                data:{
-                    canvas_data:$("#captured_image").val(),
-                    csrfmiddlewaretoken: '{{ csrf_token }}'
-                },
-                success:function(){
-                    alert('Success');
-                }
-            })
-    }
+        $("form1").submit(function(){
+        alert("Submitted");
+        });
+      
+        document.getElementById('captured_image').value = canvas.toDataURL('image/png');
+        $.ajax({
+            type:'POST',
+            url:'/input',
+            data:{
+                canvas_data:$("#captured_image").val(),
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success:function(){
+    
+            }
+        })
+    
 
     }
     ,1000)
