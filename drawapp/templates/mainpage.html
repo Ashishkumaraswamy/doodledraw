@@ -42,7 +42,7 @@
         </div>       
         <div class="text_item" id="text_item">
             <div class="guessbox" id="guessbox">
-            <p>I guess aeroplane<p>
+            <p>....<p>
             </div>
         </div>
         
@@ -97,7 +97,7 @@
 
     ctx.beginPath(); // begin
 
-    ctx.lineWidth = 9;
+    ctx.lineWidth = 7;
     ctx.lineCap = 'round';
     ctx.strokeStyle = "black";
 
@@ -144,14 +144,12 @@
             },
             success:function(text){
                 console.log(text);
-                var message = "I guess"+text;
+                var message = "I guess "+text;
                 document.getElementById("guessbox").innerHTML="<p>"+message+"<p>";
                 var msg = new SpeechSynthesisUtterance(message);
-                window.speechSynthesis.speak(msg);    
+                window.speechSynthesis.speak(msg);  
             }
         })
-    
-
     }
     ,1000)
 
