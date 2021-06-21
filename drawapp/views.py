@@ -1,15 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
-from PIL import Image
 import re
 import base64
 import os
+import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 from drawapp.classify import classify
 from PIL import Image, ImageOps
-import cv2
 from tensorflow.keras.models import load_model
 
 
