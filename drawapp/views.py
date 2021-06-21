@@ -10,9 +10,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from skimage.transform import resize
 from skimage.io import imread
-from keras.models import load_model
+import tensorflow as tf
 import pickle
-from keras.layers import Lambda
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -95,7 +94,7 @@ def classify(image):
 
 
 def predictimage(im):
-    model = load_model('drawapp\keras.h5')
+    model = tf.keras.models.load_model('drawapp\keras.h5')
     # model = pickle.load(open('drawapp\model (1).pkl', 'rb'))
     image_size = 28
     imgcrop = cropimage(im)
@@ -108,8 +107,6 @@ def predictimage(im):
     pred = model.predict(np.expand_dims(x, axis=0))[0]
     ind = (-pred).argsort()[:5]
     latex = [gamecat[i] for i in ind]
-    for i in ind:
-        print(gamecat[i], ':', pred[i])
     return latex[0]
 
 
