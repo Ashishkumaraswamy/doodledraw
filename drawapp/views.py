@@ -3,13 +3,17 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from PIL import Image, ImageOps
 import re
-import base64
 import io
+import base64
+import os
 import matplotlib.pyplot as plt
 import numpy as np
 from skimage.transform import resize
 from skimage.io import imread
-from keras.models import load_model
+from tensorflow.keras.models import load_model
+import pickle
+import warnings
+warnings.filterwarnings('ignore')
 
 # Create your views here.
 
@@ -25,6 +29,11 @@ gamecat = ['spider', 'bed', 'sock', 'frying_pan', 'grapes', 'basketball', 'axe',
            'suitcase', 'bench', 'moon', 'wheel', 'cloud', 'eye', 'line', 'pants', 'airplane', 'smiley_face', 'camera', 'moustache',
            'pizza', 'triangle', 'broom', 'key', 'bicycle', 'snake', 'donut', 'clock', 'dumbbell', 'candle', 'ladder', 't-shirt', 'mushroom',
            'helmet', 'baseball_bat', 'lightning', 'table', 'door']
+
+
+def normalize(data):
+    "Takes a list or a list of lists and returns its normalized form"
+    return np.interp(data, [0, 255], [-1, 1])
 
 
 def random():
@@ -68,9 +77,15 @@ def get_canvas(request):
         im = Image.open(tempimg)
         im = im.convert('RGB')
         im.save('temp.jpg')
+        im = Image.open('temp.jpg')
         cat = classify(im)
         print(cat)
         return HttpResponse(cat)
+
+# from PIL import Image, ImageOps
+# im = Image.open('temp.jpg')
+# cat = classify(im)
+# print(cat)
 
 
 def classify(image):
@@ -80,6 +95,7 @@ def classify(image):
 
 def predictimage(im):
     model = load_model('drawapp\keras.h5')
+    # model = pickle.load(open('drawapp\model (1).pkl', 'rb'))
     image_size = 28
     imgcrop = cropimage(im)
     if imgcrop.size == 0:
@@ -97,8 +113,8 @@ def predictimage(im):
 def cropimage(im):
     im = ImageOps.grayscale(im)
     im = np.array(im)
-    im = im % 255
-    # printarray2d(im)
+    im = np.where(im == 255, 0, im)
+    im = np.where(im != 0, 255-im, im)
     imagedim = []
     start = []
     maxwidth = 0
@@ -130,12 +146,21 @@ def cropimage(im):
         pass
     return imgcrop
 
-def printarray(x):
-  for i in range(0,x.shape[0]):
-    for j in range(0,x.shape[1]):
-      print(np.round(x[i][j][0],3),end=" ")
-    print()
 
-im = Image.open('temp.png')
+def printarray2d(x):
+    for i in range(0, x.shape[0]):
+        for j in range(0, x.shape[1]):
+            print(np.round(x[1][j], 3), end=" ")
+        print()
+
+
+def printarray(x):
+    for i in range(0, x.shape[0]):
+        for j in range(0, x.shape[1]):
+            print(np.round(x[i][j][0], 3), end=" ")
+        print()
+
+
+im = Image.open('temp.jpg')
 cat = classify(im)
 print(cat)

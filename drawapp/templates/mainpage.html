@@ -121,6 +121,7 @@
         if(timer<0)
         {
             clearInterval(x);
+            clearInterval(y);
             document.getElementById("timer").innerHTML="<h1>TIME UP!</h1>";
             // localStorage.setItem('image',"");
             // localStorage.setItem('timer',10);
@@ -134,26 +135,43 @@
         alert("Submitted");
         });
       
-        document.getElementById('captured_image').value = canvas.toDataURL('image/png');
-        $.ajax({
-            type:'POST',
-            url:'/input',
-            data:{
-                canvas_data:$("#captured_image").val(),
-                csrfmiddlewaretoken: '{{ csrf_token }}'
-            },
-            success:function(text){
-                console.log(text);
-                var message = "I guess "+text;
-                document.getElementById("guessbox").innerHTML="<p>"+message+"<p>";
-                // var msg = new SpeechSynthesisUtterance(message);
-                // window.speechSynthesis.speak(msg);  
-            }
-        })
+        // document.getElementById('captured_image').value = canvas.toDataURL('image/png');
+        // $.ajax({
+        //     type:'POST',
+        //     url:'/input',
+        //     data:{
+        //         canvas_data:$("#captured_image").val(),
+        //         csrfmiddlewaretoken: '{{ csrf_token }}'
+        //     },
+        //     success:function(text){
+        //         console.log(text);
+        //         var message = "I guess "+text;
+        //         document.getElementById("guessbox").innerHTML="<p>"+message+"<p>";
+        //         // var msg = new SpeechSynthesisUtterance(message);
+        //         // window.speechSynthesis.speak(msg);  
+        //     }
+        // })
     }
     ,1000)
-
-
+    var y=setInterval(function(e){
+        document.getElementById('captured_image').value = canvas.toDataURL('image/png');
+            $.ajax({
+                type:'POST',
+                url:'/input',
+                data:{
+                    canvas_data:$("#captured_image").val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success:function(text){
+                    console.log(text);
+                    var message = "I guess "+text;
+                    document.getElementById("guessbox").innerHTML="<p>"+message+"<p>";
+                    // var msg = new SpeechSynthesisUtterance(message);
+                    // window.speechSynthesis.speak(msg);  
+                }
+            })
+        }
+    ,2000)
 
     document.getElementById("eraser").onclick=()=>{
         context=canvas.getContext('2d');
