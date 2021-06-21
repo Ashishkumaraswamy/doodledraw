@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from PIL import Image, ImageOps
 import re
+import io
 import base64
 import os
 import matplotlib.pyplot as plt
@@ -73,9 +74,15 @@ def get_canvas(request):
         im = Image.open(tempimg)
         im = im.convert('RGB')
         im.save('temp.jpg')
+        im = Image.open('temp.jpg')
         cat = classify(im)
         print(cat)
         return HttpResponse(cat)
+
+# from PIL import Image, ImageOps
+# im = Image.open('temp.jpg')
+# cat = classify(im)
+# print(cat)
 
 
 def classify(image):
@@ -102,8 +109,8 @@ def predictimage(im):
 def cropimage(im):
     im = ImageOps.grayscale(im)
     im = np.array(im)
-    im = im % 255
-    # printarray2d(im)
+    im = np.where(im == 255, 0, im)
+    im = np.where(im != 0, 255-im, im)
     imagedim = []
     start = []
     maxwidth = 0
@@ -134,3 +141,22 @@ def cropimage(im):
     except ValueError as e:
         pass
     return imgcrop
+
+
+def printarray2d(x):
+    for i in range(0, x.shape[0]):
+        for j in range(0, x.shape[1]):
+            print(np.round(x[1][j], 3), end=" ")
+        print()
+
+
+def printarray(x):
+    for i in range(0, x.shape[0]):
+        for j in range(0, x.shape[1]):
+            print(np.round(x[i][j][0], 3), end=" ")
+        print()
+
+
+im = Image.open('temp.jpg')
+cat = classify(im)
+print(cat)
