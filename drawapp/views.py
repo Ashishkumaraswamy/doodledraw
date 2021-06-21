@@ -1,45 +1,43 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
-from PIL import Image
+from PIL import Image, ImageOps
 import re
 import base64
 import io
 import matplotlib.pyplot as plt
 import numpy as np
-from drawapp.classify import classify
-from PIL import Image, ImageOps
-
+from skimage.transform import resize
+from skimage.io import imread
+from tensorflow.keras.models import load_model
 
 # Create your views here.
 
-imgquescat = []
 imgques = []
 cnt = -1
-majorcat = ['vehicles', 'utils']
-utils = ['backpack', 'screwdriver', 'bucket', 'candle', 'cup']
-sports = ['basketball', 'bat', 'drums', 'baseball bat', 'pool']
-vehicle = ['airplane', 'aircraft carrier', 'bus', 'van',
-           'truck', 'train', 'tractor', 'parachute', 'bicycle']
+gamecat = ['spider', 'bed', 'sock', 'frying_pan', 'grapes', 'basketball', 'axe', 'wristwatch', 'bread', 'anvil',
+           'mountain', 'rifle', 'rainbow', 'stop_sign', 'power_outlet', 'alarm_clock',
+           'drums', 'lollipop', 'cookie', 'knife', 'scissors', 'flower', 'pencil', 'apple', 'car', 'tent', 'cat', 'beard',
+           'umbrella', 'butterfly', 'radio', 'shovel', 'sun', 'syringe', 'bird', 'sword', 'book', 'face', 'baseball', 'laptop', 'hammer',
+           'ice_cream', 'spoon', 'tree', 'microphone', 'bridge', 'traffic_light', 'star', 'diving_board', 'shorts',
+           'chair', 'eyeglasses', 'fan', 'tooth', 'cell_phone', 'headphones', 'saw', 'pillow', 'cup', 'square', 'circle',
+           'light_bulb', 'paper_clip', 'screwdriver', 'tennis_racquet', 'coffee_cup', 'envelope', 'hat', 'hot_dog', 'ceiling_fan',
+           'suitcase', 'bench', 'moon', 'wheel', 'cloud', 'eye', 'line', 'pants', 'airplane', 'smiley_face', 'camera', 'moustache',
+           'pizza', 'triangle', 'broom', 'key', 'bicycle', 'snake', 'donut', 'clock', 'dumbbell', 'candle', 'ladder', 't-shirt', 'mushroom',
+           'helmet', 'baseball_bat', 'lightning', 'table', 'door']
 
 
 def random():
-    global majorcat
+    global gamecat
     global imgques
     global cnt
-    global imgquescat
 
-    ques = np.random.choice(majorcat)
-    if ques in imgquescat:
+    ques = np.random.choice(gamecat)
+    if ques in imgques:
         random()
     else:
-        imgquescat.append(ques)
-        if ques == 'vehicles':
-            imgques.append(np.random.choice(vehicle).upper())
-        elif ques == 'sports':
-            imgques.append(np.random.choice(sports).upper())
-        elif ques == 'utils':
-            imgques.append(np.random.choice(utils).upper())
+        ques = ques.upper()
+        imgques.append(ques)
         cnt += 1
 
 
@@ -52,7 +50,6 @@ def game(request):
     global imgques
     random()
     if cnt < 6:
-        print(cnt)
         return render(request, "mainpage.html", {
             'imgques': imgques[cnt],
         })
@@ -63,28 +60,72 @@ def game(request):
 def get_canvas(request):
     global imgques
     global cnt
-
     if request.method == "POST":
         captured_image = request.POST['canvas_data']
         imgstr = re.search('base64,(.*)', captured_image).group(1)
         imgstr = base64.b64decode(imgstr)
-        # print(imgstr)
         tempimg = io.BytesIO(imgstr)
         im = Image.open(tempimg)
-        im = ImageOps.grayscale(im)
-        im.show()
-        im = np.array(im)
+        im = im.convert('RGB')
+        im.save('temp.jpg')
+        cat = classify(im)
+        print(cat)
+        return HttpResponse(cat)
 
-        cat = classify(im, imgquescat[cnt])
-        if imgquescat[cnt] == 'vehicles':
-            global vehicle
-            print(vehicle[cat])
-            return HttpResponse(vehicle[cat])
-        elif imgquescat[cnt] == 'sports':
-            global sports
-            print(sports[cat])
-            return HttpResponse(sports[cat])
-        elif imgquescat[cnt] == 'utils':
-            global utils
-            print(utils[cat])
-            return HttpResponse(utils[cat])
+
+def classify(image):
+    cat = predictimage(image)
+    return cat
+
+
+def predictimage(im):
+    model = load_model('drawapp\keras.h5')
+    image_size = 28
+    imgcrop = cropimage(im)
+    if imgcrop.size == 0:
+        return '....'
+    imgcropped = resize(imgcrop, (28, 28))
+    x = imgcropped
+    x = x.reshape(image_size, image_size, 1).astype('float32')
+    x = x*3
+    pred = model.predict(np.expand_dims(x, axis=0))[0]
+    ind = (-pred).argsort()[:5]
+    latex = [gamecat[i] for i in ind]
+    return latex[0]
+
+
+def cropimage(im):
+    im = ImageOps.grayscale(im)
+    im = np.array(im)
+    im = im % 255
+    # printarray2d(im)
+    imagedim = []
+    start = []
+    maxwidth = 0
+    startrow = -1
+    endrow = -1
+    for i in range(im.shape[0]):
+        listrow = []
+        for j in range(im.shape[1]):
+            if im[i][j] != 0:
+                listrow = im[i, j:].tolist()
+                start.append(j)
+                break
+        for k in range(len(listrow)-1, 0, -1):
+            if listrow[k] != 0:
+                listrow = listrow[:k+1]
+                if len(listrow) != 0:
+                    if start[-1]+len(listrow) > maxwidth:
+                        maxwidth = start[-1]+len(listrow)
+                    if len(imagedim) == 0:
+                        startrow = i
+                    endrow = i
+                    imagedim.append(listrow)
+                break
+    imgcrop = np.array([])
+    try:
+        min_start = np.min(start)
+        imgcrop = im[startrow-50:endrow+50, min_start-50:maxwidth+50]
+    except ValueError as e:
+        pass
+    return imgcrop
