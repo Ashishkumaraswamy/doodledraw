@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from skimage.transform import resize
 from skimage.io import imread
-from tensorflow.keras.models import load_model
+import tensorflow as tf
 import pickle
 import warnings
 warnings.filterwarnings('ignore')
@@ -94,7 +94,7 @@ def classify(image):
 
 
 def predictimage(im):
-    model = load_model('drawapp\keras.h5')
+    model = tf.keras.models.load_model('drawapp\keras.h5')
     # model = pickle.load(open('drawapp\model (1).pkl', 'rb'))
     image_size = 28
     imgcrop = cropimage(im)
