@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from skimage.transform import resize
 from skimage.io import imread
-from tensorflow.keras.models import load_model
+from keras.models import load_model
 
 # Create your views here.
 
@@ -129,3 +129,13 @@ def cropimage(im):
     except ValueError as e:
         pass
     return imgcrop
+
+def printarray(x):
+  for i in range(0,x.shape[0]):
+    for j in range(0,x.shape[1]):
+      print(np.round(x[i][j][0],3),end=" ")
+    print()
+
+im = Image.open('temp.png')
+cat = classify(im)
+print(cat)
