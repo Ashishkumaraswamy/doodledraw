@@ -10,8 +10,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 from skimage.transform import resize
 from skimage.io import imread
-from tensorflow.keras.models import load_model
+from keras.models import load_model
 import pickle
+from keras.layers import Lambda
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -107,6 +108,8 @@ def predictimage(im):
     pred = model.predict(np.expand_dims(x, axis=0))[0]
     ind = (-pred).argsort()[:5]
     latex = [gamecat[i] for i in ind]
+    for i in ind:
+        print(gamecat[i], ':', pred[i])
     return latex[0]
 
 
