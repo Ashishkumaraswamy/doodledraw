@@ -4,7 +4,7 @@ from django.template import RequestContext
 from PIL import Image, ImageOps
 import re
 import base64
-import io
+import os
 import matplotlib.pyplot as plt
 import numpy as np
 from skimage.transform import resize
@@ -25,6 +25,11 @@ gamecat = ['spider', 'bed', 'sock', 'frying_pan', 'grapes', 'basketball', 'axe',
            'suitcase', 'bench', 'moon', 'wheel', 'cloud', 'eye', 'line', 'pants', 'airplane', 'smiley_face', 'camera', 'moustache',
            'pizza', 'triangle', 'broom', 'key', 'bicycle', 'snake', 'donut', 'clock', 'dumbbell', 'candle', 'ladder', 't-shirt', 'mushroom',
            'helmet', 'baseball_bat', 'lightning', 'table', 'door']
+
+
+def normalize(data):
+    "Takes a list or a list of lists and returns its normalized form"
+    return np.interp(data, [0, 255], [-1, 1])
 
 
 def random():
