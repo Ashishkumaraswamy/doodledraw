@@ -30,6 +30,8 @@ gamecat = ['spider', 'bed', 'sock', 'frying_pan', 'grapes', 'basketball', 'axe',
            'suitcase', 'bench', 'moon', 'wheel', 'cloud', 'eye', 'line', 'pants', 'airplane', 'smiley_face', 'camera', 'moustache',
            'pizza', 'triangle', 'broom', 'key', 'bicycle', 'snake', 'donut', 'clock', 'dumbbell', 'candle', 'ladder', 't-shirt', 'mushroom',
            'helmet', 'baseball_bat', 'lightning', 'table', 'door']
+for i in range(len(gamecat)):
+    gamecat[i] = gamecat[i].replace('_', ' ')
 
 
 def normalize(data):

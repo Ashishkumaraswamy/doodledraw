@@ -7,19 +7,32 @@
     <title>Question</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link href="{%static 'drawapp/question.css' %}" rel="stylesheet" >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kavivanar&family=Roboto:wght@100&family=Shadows+Into+Light&family=Sunshiney&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="questionnumber">
         <h1 class="number">Drawing {{count}}/6</h1>
     </div>
     <div class="question">
-        <h1 class="questiontxt">Quest</h1>
-        <h1 class="questionanme">Draw {{imgques}}</h1>
+        <h1 class="questiontxt">Draw</h1>
+        <h1 class="questionname">{{imgques}}</h1>
         <h1 class="questiontxt">in under 40 seconds</h1>
     </div>
     <div class="play">
-        <a href="{%url 'game' %}"><button class="playbtn">Got It!</button></a>
+        <a href="{%url 'game' %}"><button class="playbtn"><h1 class="btntext">Got It !</h1></button></a>
     </div>
 </body>
+<script>
+    alert(window.innerWidth+' '+window.innerHeight);
+</script>
 </html>
+
 

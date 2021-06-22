@@ -2,8 +2,6 @@
   margin: 0px;
 }
 
-
-
 .window {
   width: 100vw;
   height: 100vh;
@@ -214,7 +212,7 @@ a:hover::after {
     margin-left: 100px;
   }
   .description h2 {
-    margin-left: 0px;
+    margin-left: 10%;
     font-size: 25px;
   }
 
