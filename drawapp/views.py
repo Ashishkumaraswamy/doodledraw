@@ -11,6 +11,7 @@ import numpy as np
 from skimage.transform import resize
 from skimage.io import imread
 import tensorflow as tf
+from tensorflow.keras.models import load_model
 import pickle
 import warnings
 warnings.filterwarnings('ignore')
