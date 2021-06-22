@@ -58,12 +58,24 @@ def index(request):
 def game(request):
     global cnt
     global imgques
+    print(len(imgques))
+    return render(request, "mainpage.html", {
+        'imgques': imgques[-1],
+    })
+
+
+def question(request):
+    global cnt
+    global imgques
     random()
     if cnt < 6:
-        return render(request, "mainpage.html", {
+        return render(request, "question.html", {
             'imgques': imgques[cnt],
+            'count': cnt+1,
         })
     else:
+        cnt = 0
+        imgques = []
         return render(request, "home.html")
 
 
@@ -81,7 +93,9 @@ def get_canvas(request):
         im = Image.open('temp.jpg')
         cat = classify(im)
         print(cat)
-        return HttpResponse(cat)
+        if cat == imgques[-1].lower():
+            return HttpResponse('Oh! I got it. It\'s a '+cat)
+        return HttpResponse('I guess '+cat)
 
 # from PIL import Image, ImageOps
 # im = Image.open('temp.jpg')
@@ -95,7 +109,7 @@ def classify(image):
 
 
 def predictimage(im):
-    model = tf.keras.models.load_model(os.path.join("./drawapp/","keras.h5"))
+    model = tf.keras.models.load_model(os.path.join("./drawapp/", "keras.h5"))
     # model = pickle.load(open('drawapp\model (1).pkl', 'rb'))
     image_size = 28
     imgcrop = cropimage(im)
@@ -160,8 +174,3 @@ def printarray(x):
         for j in range(0, x.shape[1]):
             print(np.round(x[i][j][0], 3), end=" ")
         print()
-
-
-im = Image.open('temp.jpg')
-cat = classify(im)
-print(cat)

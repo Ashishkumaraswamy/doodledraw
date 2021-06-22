@@ -1,0 +1,25 @@
+{%load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Question</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link href="{%static 'drawapp/question.css' %}" rel="stylesheet" >
+</head>
+<body>
+    <div class="questionnumber">
+        <h1 class="number">Drawing {{count}}/6</h1>
+    </div>
+    <div class="question">
+        <h1 class="questiontxt">Quest</h1>
+        <h1 class="questionanme">Draw {{imgques}}</h1>
+        <h1 class="questiontxt">in under 40 seconds</h1>
+    </div>
+    <div class="play">
+        <a href="{%url 'game' %}"><button class="playbtn">Got It!</button></a>
+    </div>
+</body>
+</html>
+

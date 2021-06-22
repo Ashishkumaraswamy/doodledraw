@@ -13,10 +13,6 @@
         <title>Game</title>
     </head>
     <body>
-        <div class="popup" id="popup" style="background:#ffd139;width:100%;height:100%;position:relative">
-            <h1>Here</h1>
-        </div>
-
         <form id="form1">
             {% csrf_token %}
             <div class="body_item" id="body_item">
@@ -25,7 +21,6 @@
                 </canvas>
             </div>
             <input type="hidden" name="captured_image" id="captured_image">
-            <!-- <input id="upload_image"  type="submit" onclick="save()" value="Upload the image"> -->
         </form>
         <!-- 
         try commenting this run that da -->
@@ -81,14 +76,6 @@
     ctx.canvas.height = window.innerHeight;
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    // if(localStorage.getItem('image')!=="")
-    // {
-    //     var img = new Image;
-    //     img.src = localStorage.getItem('image');
-    //     img.onload = function () {
-    //         ctx.drawImage(img, 0, 0);
-    //     };
-    // }
     }
 
     function draw(e) {
@@ -122,38 +109,19 @@
         {
             clearInterval(x);
             clearInterval(y);
+            var msg = new SpeechSynthesisUtterance('Sorry I couldn\'t guess it');
+            window.speechSynthesis.speak(msg);  
             document.getElementById("timer").innerHTML="<h1>TIME UP!</h1>";
             // localStorage.setItem('image',"");
             // localStorage.setItem('timer',10);
-            setTimeout("",1000);
-            document.getElementById("header_item").style.display="none";
-            document.getElementById("body_item").style.display="none";
-            document.getElementById("text_item").style.display="none";
-            document.getElementById("popup").style.display="block";
+            setTimeout(() => { location.href="{%url 'question' %}"; }, 3000);  
         }
         $("form1").submit(function(){
         alert("Submitted");
         });
-      
-        // document.getElementById('captured_image').value = canvas.toDataURL('image/png');
-        // $.ajax({
-        //     type:'POST',
-        //     url:'/input',
-        //     data:{
-        //         canvas_data:$("#captured_image").val(),
-        //         csrfmiddlewaretoken: '{{ csrf_token }}'
-        //     },
-        //     success:function(text){
-        //         console.log(text);
-        //         var message = "I guess "+text;
-        //         document.getElementById("guessbox").innerHTML="<p>"+message+"<p>";
-        //         // var msg = new SpeechSynthesisUtterance(message);
-        //         // window.speechSynthesis.speak(msg);  
-        //     }
-        // })
     }
     ,1000)
-    var y=setInterval(function(e){
+    var y=setInterval(function(e){  
         document.getElementById('captured_image').value = canvas.toDataURL('image/png');
             $.ajax({
                 type:'POST',
@@ -164,10 +132,17 @@
                 },
                 success:function(text){
                     console.log(text);
-                    var message = "I guess "+text;
+                    var message = text;
+                    var msg = new SpeechSynthesisUtterance(message);
+                    window.speechSynthesis.speak(msg);  
                     document.getElementById("guessbox").innerHTML="<p>"+message+"<p>";
-                    // var msg = new SpeechSynthesisUtterance(message);
-                    // window.speechSynthesis.speak(msg);  
+
+                    if(text.slice(0,3)=='Oh!')
+                    {
+                        clearInterval(y);
+                        clearInterval(x);
+                        setTimeout(() => { location.href="{%url 'question' %}"; }, 5000);  
+                    }
                 }
             })
         }
