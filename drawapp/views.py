@@ -19,7 +19,6 @@ warnings.filterwarnings('ignore')
 # Create your views here.
 
 imgques = []
-cnt = -1
 gamecat = ['spider', 'bed', 'sock', 'frying_pan', 'grapes', 'basketball', 'axe', 'wristwatch', 'bread', 'anvil',
            'mountain', 'rifle', 'rainbow', 'stop_sign', 'power_outlet', 'alarm_clock',
            'drums', 'lollipop', 'cookie', 'knife', 'scissors', 'flower', 'pencil', 'apple', 'car', 'tent', 'cat', 'beard',
@@ -39,51 +38,57 @@ def normalize(data):
     return np.interp(data, [0, 255], [-1, 1])
 
 
-def random():
+def random(request):
     global gamecat
     global imgques
-    global cnt
 
     ques = np.random.choice(gamecat)
     if ques in imgques:
-        random()
+        random(request)
     else:
         ques = ques.upper()
-        imgques.append(ques)
-        cnt += 1
+        request.session["imgques"].append(ques)
+        request.session["cnt"] += 1
 
 
 def index(request):
+    if "cnt" not in request.session:
+        request.session["cnt"] = -1
+    if "imgques" not in request.session:
+        request.session["imgques"] = imgques
+    request.session["cnt"] = -1
+    request.session["imgques"] = imgques
     return render(request, "home.html")
 
 
 def game(request):
-    global cnt
     global imgques
     print(len(imgques))
     return render(request, "mainpage.html", {
-        'imgques': imgques[-1],
+        'imgques': request.session["imgques"][-1],
     })
 
 
 def question(request):
-    global cnt
     global imgques
-    random()
-    if cnt < 6:
+    if "cnt" not in request.session:
+        request.session["cnt"] = -1
+    if "imgques" not in request.session:
+        request.session["imgques"] = imgques
+    random(request)
+    if request.session['cnt'] < 6:
         return render(request, "question.html", {
-            'imgques': imgques[cnt],
-            'count': cnt+1,
+            'imgques': request.session["imgques"][-1],
+            'count': request.session["cnt"]+1,
         })
     else:
-        cnt = 0
-        imgques = []
+        request.session["cnt"] = -1
+        request.session["imgques"] = []
         return render(request, "home.html")
 
 
 def get_canvas(request):
     global imgques
-    global cnt
     if request.method == "POST":
         captured_image = request.POST['canvas_data']
         imgstr = re.search('base64,(.*)', captured_image).group(1)
@@ -95,14 +100,9 @@ def get_canvas(request):
         im = Image.open('temp.jpg')
         cat = classify(im)
         print(cat)
-        if cat == imgques[-1].lower():
+        if cat == request.session["imgques"][-1].lower():
             return HttpResponse('Oh! I got it. It\'s a '+cat)
         return HttpResponse('I guess '+cat)
-
-# from PIL import Image, ImageOps
-# im = Image.open('temp.jpg')
-# cat = classify(im)
-# print(cat)
 
 
 def classify(image):
@@ -112,7 +112,6 @@ def classify(image):
 
 def predictimage(im):
     model = tf.keras.models.load_model(os.path.join("./drawapp/", "keras.h5"))
-    # model = pickle.load(open('drawapp\model (1).pkl', 'rb'))
     image_size = 28
     imgcrop = cropimage(im)
     if imgcrop.size == 0:
