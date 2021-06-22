@@ -95,7 +95,7 @@ def classify(image):
 
 
 def predictimage(im):
-    model = tf.keras.models.load_model('drawapp\keras.h5')
+    model = tf.keras.models.load_model(os.path.join("./drawapp/","keras.h5"))
     # model = pickle.load(open('drawapp\model (1).pkl', 'rb'))
     image_size = 28
     imgcrop = cropimage(im)
