@@ -56,9 +56,12 @@ def index(request):
         request.session["cnt"] = -1
     if "imgques" not in request.session:
         request.session["imgques"] = imgques
+    if "ans" not in request.session:
+        request.session["ans"] = []
     request.session["cnt"] = -1
     request.session["imgques"] = imgques
-    return render(request, "home.html")
+    request.session["ans"] = [0, 0, 0, 0, 0, 0]
+    return render(request, "home1.html")
 
 
 def game(request):
@@ -68,8 +71,10 @@ def game(request):
         'imgques': request.session["imgques"][-1],
     })
 
+
 def result(request):
     return render(request, "result.html")
+
 
 def question(request):
     global imgques
@@ -90,8 +95,9 @@ def question(request):
         request.session["cnt"] = -1
         request.session["imgques"] = []
         return render(request, "result.html", {
-            'imgques': cnt,
-            'count': listq,
+            'imgques': request.session["imgques"],
+            'ans': request.session["ans"],
+            'score': np.sum(request.session["ans"]),
         })
 
 
@@ -104,11 +110,14 @@ def get_canvas(request):
         tempimg = io.BytesIO(imgstr)
         im = Image.open(tempimg)
         im = im.convert('RGB')
-        im.save('drawapp\static\drawapp\\temp.jpg')
-        im = Image.open('drawapp\static\drawapp\\temp.jpg')
+        im.save('drawapp\static\drawapp\\temp' +
+                str(request.session['cnt']+1)+'.jpg')
+        im = Image.open('drawapp\static\drawapp\\temp' +
+                        str(request.session['cnt']+1)+'.jpg')
         cat = classify(im)
         print(cat)
         if cat == request.session["imgques"][-1].lower():
+            request.session['ans'][request.session['cnt']] = 1
             return HttpResponse('Oh! I got it. It\'s a '+cat)
         return HttpResponse('I guess '+cat)
 
