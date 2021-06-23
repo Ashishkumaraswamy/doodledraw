@@ -31,18 +31,35 @@
     <div class="imgcontainer">
         <div class="row">
             <div class="column">
-                {{imgques[0]}}
-                <br>
-                <img src="{% static 'drawapp/temp{{i}}.jpg' %}" alt="" class="pic">
-                <!-- <img src="{% static 'drawapp/temp2.jpg' %}" alt="" class="pic">
-                <img src="{% static 'drawapp/temp3.jpg' %}" alt="" class="pic"> -->
+                <div class="image">
+                    <h1>{{imgques.0}}</h1>
+                    <img src="{% static 'drawapp/temp1.jpg' %}" alt="" class="pic">
+                </div>
+                <div class="image">
+                    <h1>{{imgques.1}}</h1>
+                    <img src="{% static 'drawapp/temp2.jpg' %}" alt="" class="pic">
+                </div>
+                <div class="image">
+                    <h1>{{imgques.2}}</h1>
+                    <img src="{% static 'drawapp/temp3.jpg' %}" alt="" class="pic">
+                </div>
             </div>
         </div>
+        <br><br>
         <div class="row">
             <div class="column">
-                <img src="{% static 'drawapp/temp4.jpg' %}" alt="" class="pic">
-                <img src="{% static 'drawapp/temp5.jpg' %}" alt="" class="pic">
-                <img src="{% static 'drawapp/temp6.jpg' %}" alt="" class="pic">
+                <div class="image">
+                    <h1>{{imgques.3}}</h1>
+                    <img src="{% static 'drawapp/temp4.jpg' %}" alt="" class="pic">
+                </div>
+                <div class="image">
+                    <h1>{{imgques.4}}</h1>
+                    <img src="{% static 'drawapp/temp5.jpg' %}" alt="" class="pic">
+                </div>
+                <div class="image">
+                    <h1>{{imgques.5}}</h1>
+                    <img src="{% static 'drawapp/temp6.jpg' %}" alt="" class="pic">
+                </div>
             </div>
         </div>
     </div>

@@ -5,7 +5,7 @@
   .window {
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(rgba(57, 60, 73, 0.7), rgba(57, 60, 73, 0.7)),url(bg-1.png);
+    background: url(bg-1.png);
     background-position: center;
     background-size: cover;
   }
@@ -79,7 +79,6 @@
   
   .info {
     position: relative;
-    top: 10%;
     width: 100%;
     background: transparent;
     display: flex;
@@ -87,16 +86,16 @@
   
   .game_name {
     flex-basis: 40%;
-    margin-top: 100px;
+    margin-top: 50px;
     margin-left: 200px;
   }
   
   .first-line {
-    font-family: "Just Another Hand", cursive;
+    font-family: "Shadows Into Light", cursive;
     font-size: 100px;
     font-weight: 50px;
     text-align: left;
-    color: white;
+    color: black;
   }
   
   .second-line {
@@ -112,7 +111,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    top: 120px;
+    top: 70px;
     flex-basis: 50%;
   }
   
@@ -122,16 +121,16 @@
   
   .description h2 {
     margin-left: 50px;
-    font-family: "Staatliches", cursive;
-    font-size: 30px;
-    color: white;
+    font-family: "Shadows Into Light", cursive;
+    font-size: 40px;
+    color: black;
     cursor: pointer;
   }
   
   .description h2::after {
     content: "";
     width: 100%;
-    height: 2px;
+    height: 4px;
     background: #f44336;
     display: block;
     margin: auto;
@@ -148,17 +147,18 @@
   
   .details p {
     text-indent: 50px;
-    font-family: "Merriweather", serif;
+    font-family: "Shadows Into Light";
     font-size: 20px;
-    color: white;
+    color: black;
   }
   
   .play {
     position: relative;
-    top: 200px;
-    width: 100%;
+    top: 175px;
+    width: 40%;
     height: 50px;
-    text-align: center;
+    left:60%;
+    /* text-align: center; */
   }
   
   .playbtn {
@@ -176,20 +176,30 @@
   
   @media only screen and (max-height: 800px) {
     .info {
-      top: 0%;
+      top: -5%;
     }
     .first-line {
-      font-size: 90px;
+      font-size: 80px;
     }
     .second-line {
       left: 100px;
-      font-size: 90px;
+      font-size: 80px;
     }
     .play {
       top: 50px;
     }
     .game_name {
-      margin-left: 50px;
+      margin-left: 150px;
+      margin-top: 60px;
+    }
+    .details p {
+      font-size: 16px;
+    }
+    .description h2 {
+      font-size: 20px;
+    }
+    .details{
+      top:0px;
     }
   }
   

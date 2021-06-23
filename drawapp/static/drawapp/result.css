@@ -26,7 +26,7 @@
   .question {
     position: relative;
     width: 100%;
-    height: 40%;
+    height: auto;
   }
   
   .questiontxt {
@@ -54,32 +54,55 @@
   
   
   .imgcontainer{
+    position: relative;
     display: -ms-flexbox; /* IE 10 */
     display: flex;
     -ms-flex-wrap: wrap; /* IE 10 */
     flex-wrap: wrap;
-    padding-left: 25%;
+    padding-left: 28%;
   }
   .row {
+    position: relative;
     display: -ms-flexbox;
     display: flex;
+    flex-direction: row;
     -ms-flex-wrap: wrap; 
     flex-wrap: wrap;
     padding: 0 4px;
+    bottom: 20%;
+
   }
  
   .column {
+    position:relative;
     -ms-flex: 50%;
-    flex: 50%;
-    padding: 0 4px;
+    flex: 30%;
+    /* padding: 0 4px; */
+    display: flex;
+  }
+
+  .image{
+    width:20%;
+    height: 30%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
   }
   
-  .column img {
+  .image h1{
+    position: relative;
+    text-align: center;
+    font-size: 15px;
+    bottom: 5%;
+  }
+
+  .image img {
+    position: relative;
     margin-top: 8px;
+    left:30%;
     vertical-align: middle;
-    width: 20%;
+    width: 40%;
     height:auto;
-    margin-left: 2%;
     margin-bottom: 2%;
     background: rgb(167, 164, 164);
     box-shadow: 4px 5px rgb(167, 164, 164);
@@ -91,11 +114,12 @@
     position: absolute;
     top: 15%;
     color: white;
-    left: 25%;
+    left: 10%;
     font-family: "Roboto", sans-serif;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 600;
   }
+
   .playbtn {
     text-align: center;
     position: relative;

@@ -18,6 +18,7 @@ warnings.filterwarnings('ignore')
 
 # Create your views here.
 
+ans = []
 imgques = []
 gamecat = ['spider', 'bed', 'sock', 'frying_pan', 'grapes', 'basketball', 'axe', 'wristwatch', 'bread', 'anvil',
            'mountain', 'rifle', 'rainbow', 'stop_sign', 'power_outlet', 'alarm_clock',
@@ -52,21 +53,25 @@ def random(request):
 
 
 def index(request):
+    global ans
+    ans = []
     if "cnt" not in request.session:
         request.session["cnt"] = -1
     if "imgques" not in request.session:
         request.session["imgques"] = imgques
     if "ans" not in request.session:
-        request.session["ans"] = []
+        request.session["ans"] = ans
+    if request.session['cnt'] < 6:
+        request.session["cnt"] = -1
+        request.session["imgques"] = []
     request.session["cnt"] = -1
     request.session["imgques"] = imgques
-    request.session["ans"] = [0, 0, 0, 0, 0, 0]
+    request.session["ans"] = ans
     return render(request, "home1.html")
 
 
 def game(request):
     global imgques
-    print(len(imgques))
     return render(request, "mainpage.html", {
         'imgques': request.session["imgques"][-1],
     })
@@ -78,31 +83,31 @@ def result(request):
 
 def question(request):
     global imgques
+    global ans
     if "cnt" not in request.session:
         request.session["cnt"] = -1
     if "imgques" not in request.session:
         request.session["imgques"] = imgques
     random(request)
     if request.session['cnt'] < 6:
+        ans.append(0)
         return render(request, "question.html", {
             'imgques': request.session["imgques"][-1],
             'count': request.session["cnt"]+1,
         })
     else:
-        cnt = request.session["cnt"]
-        listq = []
-        listq.extend(imgques)
-        request.session["cnt"] = -1
-        request.session["imgques"] = []
+        request.session['ans'].extend(ans)
+        print(request.session["ans"])
         return render(request, "result.html", {
             'imgques': request.session["imgques"],
             'ans': request.session["ans"],
-            'score': np.sum(request.session["ans"]),
+            'score': np.sum(ans),
         })
 
 
 def get_canvas(request):
     global imgques
+    global ans
     if request.method == "POST":
         captured_image = request.POST['canvas_data']
         imgstr = re.search('base64,(.*)', captured_image).group(1)
@@ -117,7 +122,8 @@ def get_canvas(request):
         cat = classify(im)
         print(cat)
         if cat == request.session["imgques"][-1].lower():
-            request.session['ans'][request.session['cnt']] = 1
+            ans[-1] = 1
+            print("Ans", ans)
             return HttpResponse('Oh! I got it. It\'s a '+cat)
         return HttpResponse('I guess '+cat)
 
