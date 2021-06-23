@@ -1,0 +1,53 @@
+{%load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Result</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link href="{%static 'drawapp/result.css' %}" rel="stylesheet" >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kavivanar&family=Roboto:wght@100&family=Shadows+Into+Light&family=Sunshiney&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="question">
+        <h1 class="questionname">WOW Well Done!</h1>
+        <h1 class="questiontxt">Our neural network model was able to guess 0 out of 6 doodles.<br>So see your result how you did your doodles</h1>
+    </div>
+    <div class="imgcontainer">
+        <div class="row">
+            <div class="column">
+                
+                <img src="{% static 'drawapp/temp.jpg' %}" alt="" class="pic">
+                <img src="{% static 'drawapp/temp.jpg' %}" alt="" class="pic">
+                <img src="{% static 'drawapp/temp.jpg' %}" alt="" class="pic">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <img src="{% static 'drawapp/temp.jpg' %}" alt="" class="pic">
+                <img src="{% static 'drawapp/temp.jpg' %}" alt="" class="pic">
+                <img src="{% static 'drawapp/temp.jpg' %}" alt="" class="pic">
+            </div>
+        </div>
+    </div>
+    <div class="play">
+        <a href="{%url 'index' %}"><button class="playbtn"><h1 class="btntext">Back to Home</h1></button></a>
+    </div>
+</body>
+<script>
+    //alert(window.innerHeight +" "+ window.innerWidth)
+
+</script>
+</html>
+
+
