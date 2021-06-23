@@ -31,10 +31,11 @@
     <div class="imgcontainer">
         <div class="row">
             <div class="column">
-                {}
-                <img src="{% static 'drawapp/temp1.jpg' %}" alt="" class="pic">
-                <img src="{% static 'drawapp/temp2.jpg' %}" alt="" class="pic">
-                <img src="{% static 'drawapp/temp3.jpg' %}" alt="" class="pic">
+                {{imgques[0]}}
+                <br>
+                <img src="{% static 'drawapp/temp{{i}}.jpg' %}" alt="" class="pic">
+                <!-- <img src="{% static 'drawapp/temp2.jpg' %}" alt="" class="pic">
+                <img src="{% static 'drawapp/temp3.jpg' %}" alt="" class="pic"> -->
             </div>
         </div>
         <div class="row">
