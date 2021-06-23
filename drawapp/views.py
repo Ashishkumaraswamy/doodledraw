@@ -58,7 +58,7 @@ def index(request):
         request.session["imgques"] = imgques
     request.session["cnt"] = -1
     request.session["imgques"] = imgques
-    return render(request, "home.html")
+    return render(request, "home1.html")
 
 
 def game(request):

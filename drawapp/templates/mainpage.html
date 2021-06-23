@@ -60,14 +60,27 @@
     document.addEventListener('mousedown', setPosition);
     document.addEventListener('mouseup', setPosition);
     
-    document.addEventListener('touchmove', draw);
-    document.addEventListener('touchstart', setPosition);
-    document.addEventListener('touchend', setPosition);
+    document.addEventListener('touchmove', drawtouch);
+    document.addEventListener('touchstart', setPositiontouch);
+    document.addEventListener('touchend', setPositiontouch);
+
+    function setPositiontouch(e) {
+    try {
+        pos.x = e.touches[0].pageX;
+        pos.y = e.touches[0].pageY;
+    } catch (error) {
+        
+        // expected output: ReferenceError: nonExistentFunction is not defined
+         // Note - error messages will vary depending on browser
+    }
+    
+    }
 
     // new position from mouse event
     function setPosition(e) {
     pos.x = e.clientX;
     pos.y = e.clientY;
+    console.log(pos.x+" "+pos.y);
     }
 
     // resize canvas
@@ -76,6 +89,18 @@
     ctx.canvas.height = window.innerHeight;
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    }
+    
+    function drawtouch(e) {
+    ctx.beginPath(); // begin
+    ctx.lineWidth = 7;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = "black";
+
+    ctx.moveTo(pos.x, pos.y); // from
+    setPositiontouch(e)
+    ctx.lineTo(pos.x, pos.y); // to
+    ctx.stroke(); // draw it!
     }
 
     function draw(e) {
