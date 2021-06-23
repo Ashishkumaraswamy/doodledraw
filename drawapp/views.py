@@ -58,7 +58,7 @@ def index(request):
         request.session["imgques"] = imgques
     request.session["cnt"] = -1
     request.session["imgques"] = imgques
-    return render(request, "home.html")
+    return render(request, "home1.html")
 
 
 def game(request):
@@ -67,6 +67,12 @@ def game(request):
     return render(request, "mainpage.html", {
         'imgques': request.session["imgques"][-1],
     })
+
+def result(request):
+    return render(request, "result.html")
+
+def result(request):
+    return render(request, "result.html")
 
 
 def question(request):
@@ -82,9 +88,15 @@ def question(request):
             'count': request.session["cnt"]+1,
         })
     else:
+        cnt = request.session["cnt"]
+        listq = []
+        listq.extend(imgques)
         request.session["cnt"] = -1
         request.session["imgques"] = []
-        return render(request, "home.html")
+        return render(request, "result.html", {
+            'imgques': cnt,
+            'count': listq,
+        })
 
 
 def get_canvas(request):
@@ -96,8 +108,8 @@ def get_canvas(request):
         tempimg = io.BytesIO(imgstr)
         im = Image.open(tempimg)
         im = im.convert('RGB')
-        im.save('temp.jpg')
-        im = Image.open('temp.jpg')
+        im.save('drawapp\static\drawapp\\temp.jpg')
+        im = Image.open('drawapp\static\drawapp\\temp.jpg')
         cat = classify(im)
         print(cat)
         if cat == request.session["imgques"][-1].lower():

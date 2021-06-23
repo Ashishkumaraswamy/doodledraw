@@ -67,6 +67,7 @@ body {
   background: #03a703;
   box-shadow: 2px 5px #028302;
   border: 1px #028302;
+  cursor: pointer;
 }
 
 .btntext {
@@ -79,7 +80,7 @@ body {
   font-weight: 600;
 }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1000px) and (min-height: 800px){
   .playbtn {
     left: 46%;
   }
@@ -88,5 +89,18 @@ body {
   }
   .questionname {
     font-size: 42px;
+  }
+}
+
+@media only screen and (max-height: 700px) {
+  .play{
+    top:5%;
+    left:5%;
+  }
+  .questiontxt{
+    margin: 25px;
+  }
+  .questionname{
+    margin:25px;
   }
 }
