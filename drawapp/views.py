@@ -120,7 +120,7 @@ def get_canvas(request):
                 str(request.session['cnt']+1)+'.jpg')
         im = Image.open('drawapp\static\drawapp\\temp' +
                         str(request.session['cnt']+1)+'.jpg')
-        cat = inputpreprocessing(im)
+        cat = classify(im)
         print(cat)
         if cat == request.session["imgques"][-1].lower():
             ans[-1] = 1
@@ -137,11 +137,10 @@ def classify(image):
 def predictimage(im):
     model = tf.keras.models.load_model(os.path.join("./drawapp/", "keras.h5"))
     image_size = 28
-    imgcrop = cropimage(im)
+    imgcrop = inputpreprocessing(im)
     if imgcrop.size == 0:
         return '....'
-    imgcropped = resize(imgcrop, (28, 28))
-    x = imgcropped
+    x = imgcrop
     x = x.reshape(image_size, image_size, 1).astype('float32')
     x = x*3
     pred = model.predict(np.expand_dims(x, axis=0))[0]
@@ -150,41 +149,41 @@ def predictimage(im):
     return latex[0]
 
 
-def cropimage(im):
-    im = ImageOps.grayscale(im)
-    im = np.array(im)
-    im = np.where(im == 255, 0, im)
-    im = np.where(im != 0, 255-im, im)
-    imagedim = []
-    start = []
-    maxwidth = 0
-    startrow = -1
-    endrow = -1
-    for i in range(im.shape[0]):
-        listrow = []
-        for j in range(im.shape[1]):
-            if im[i][j] != 0:
-                listrow = im[i, j:].tolist()
-                start.append(j)
-                break
-        for k in range(len(listrow)-1, 0, -1):
-            if listrow[k] != 0:
-                listrow = listrow[:k+1]
-                if len(listrow) != 0:
-                    if start[-1]+len(listrow) > maxwidth:
-                        maxwidth = start[-1]+len(listrow)
-                    if len(imagedim) == 0:
-                        startrow = i
-                    endrow = i
-                    imagedim.append(listrow)
-                break
-    imgcrop = np.array([])
-    try:
-        min_start = np.min(start)
-        imgcrop = im[startrow-50:endrow+50, min_start-50:maxwidth+50]
-    except ValueError as e:
-        pass
-    return imgcrop
+# def cropimage(im):
+#     im = ImageOps.grayscale(im)
+#     im = np.array(im)
+#     im = np.where(im == 255, 0, im)
+#     im = np.where(im != 0, 255-im, im)
+#     imagedim = []
+#     start = []
+#     maxwidth = 0
+#     startrow = -1
+#     endrow = -1
+#     for i in range(im.shape[0]):
+#         listrow = []
+#         for j in range(im.shape[1]):
+#             if im[i][j] != 0:
+#                 listrow = im[i, j:].tolist()
+#                 start.append(j)
+#                 break
+#         for k in range(len(listrow)-1, 0, -1):
+#             if listrow[k] != 0:
+#                 listrow = listrow[:k+1]
+#                 if len(listrow) != 0:
+#                     if start[-1]+len(listrow) > maxwidth:
+#                         maxwidth = start[-1]+len(listrow)
+#                     if len(imagedim) == 0:
+#                         startrow = i
+#                     endrow = i
+#                     imagedim.append(listrow)
+#                 break
+#     imgcrop = np.array([])
+#     try:
+#         min_start = np.min(start)
+#         imgcrop = im[startrow-50:endrow+50, min_start-50:maxwidth+50]
+#     except ValueError as e:
+#         pass
+#     return imgcrop
 
 
 def printarray2d(x):
@@ -253,14 +252,4 @@ def inputpreprocessing(img):
     im = np.array(im)
     im = resize(im, (28, 28))
     # plt.imshow(im)
-    x = im
-    image_size = 28
-    x.shape
-    x = x.reshape(image_size, image_size, 1).astype('float32')
-    x = x*3
-    # print(x)
-    model = tf.keras.models.load_model(os.path.join("./drawapp/", "keras.h5"))
-    pred = model.predict(np.expand_dims(x, axis=0))[0]
-    ind = (-pred).argsort()[:5]
-    latex = [gamecat[i] for i in ind]
-    return latex[0]
+    return im

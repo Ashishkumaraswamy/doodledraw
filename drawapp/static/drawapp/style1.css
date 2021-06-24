@@ -1,241 +1,299 @@
 * {
-    margin: 0px;
-  }
-  
-  .window {
-    width: 100vw;
-    height: 100vh;
-    background: url(bg-1.png);
-    background-position: center;
-    background-size: cover;
-  }
-  
-  .first {
-    align-items: center;
-    color: white;
-    text-align: center;
-  }
-  
-  .first h1 {
-    font-size: 120px;
-  }
-  
-  .header {
-    display: flex;
-    width: 100%;
-    height: 10%;
-    background: transparent;
-    position: relative;
-    justify-content: space-around;
-  }
-  
-  .icon1 {
-    position: absolute;
-    right: 10%;
-    width: 50px;
-    height: 50px;
-    background: transparent;
-    border-radius: 50%;
-    z-index: 2;
-    margin: 15px auto;
-  }
-  
-  .icon-img {
-    position: relative;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
-  
-  .icon2 {
-    position: absolute;
-    right: 5%;
-    width: 50px;
-    height: 50px;
-    background: transparent;
-    border-radius: 50%;
-    z-index: 2;
-    margin: 15px auto;
-  }
-  
-  a::after {
-    content: "";
-    width: 0%;
-    height: 2px;
-    background: #f44336;
-    display: block;
-    margin: auto;
-    transition: 0.5s;
-  }
-  
-  a:hover::after {
-    content: "";
-    width: 100%;
-    height: 2px;
-    background: #f44336;
-    display: block;
-    margin: auto;
-  }
-  
+  margin: 0px;
+}
+
+.window {
+  width: 100vw;
+  height: 100vh;
+  background: url(bg-1.png);
+  background-position: center;
+  background-size: cover;
+}
+
+.first {
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.first h1 {
+  font-size: 120px;
+}
+
+.header {
+  display: flex;
+  width: 100%;
+  height: 10%;
+  background: transparent;
+  position: relative;
+  justify-content: space-around;
+}
+
+.icon1 {
+  position: absolute;
+  right: 10%;
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border-radius: 50%;
+  z-index: 2;
+  margin: 15px auto;
+}
+
+.icon-img {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.icon2 {
+  position: absolute;
+  right: 5%;
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border-radius: 50%;
+  z-index: 2;
+  margin: 15px auto;
+}
+
+a::after {
+  content: "";
+  width: 0%;
+  height: 2px;
+  background: #f44336;
+  display: block;
+  margin: auto;
+  transition: 0.5s;
+}
+
+a:hover::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background: #f44336;
+  display: block;
+  margin: auto;
+}
+
+.info {
+  position: relative;
+  width: 100%;
+  background: transparent;
+  display: flex;
+}
+
+.game_name {
+  flex-basis: 40%;
+  margin-top: 50px;
+  margin-left: 200px;
+}
+
+.first-line {
+  font-family: "Shadows Into Light", cursive;
+  font-size: 100px;
+  font-weight: 50px;
+  text-align: left;
+  color: black;
+}
+
+.second-line {
+  position: relative;
+  font-family: "Just Another Hand", cursive;
+  font-size: 100px;
+  font-weight: 50px;
+  left: 250px;
+  color: rgb(250, 246, 1);
+}
+
+.description {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  top: 70px;
+  flex-basis: 50%;
+}
+
+.options {
+  display: flex;
+}
+
+.description h2 {
+  margin-left: 50px;
+  font-family: "Shadows Into Light", cursive;
+  font-size: 40px;
+  color: black;
+  cursor: pointer;
+}
+
+.description h2::after {
+  content: "";
+  width: 100%;
+  height: 4px;
+  background: #f44336;
+  display: block;
+  margin: auto;
+}
+
+.details {
+  position: relative;
+  box-sizing: border-box;
+  top: 40px;
+  width: 65%;
+  margin: 10px;
+  left: 40px;
+}
+
+.details p {
+  position: relative;
+  text-indent: 50px;
+  font-family: "Shadows Into Light";
+  font-size: 20px;
+  color: black;
+}
+
+.play {
+  position: relative;
+  top: 175px;
+  width: 40%;
+  height: 50px;
+  left: 60%;
+  /* text-align: center; */
+}
+
+.playbtn {
+  width: 150px;
+  height: 50px;
+  background: rgb(250, 246, 1);
+  box-shadow: 1px 2px black;
+}
+
+.playbtn h2 {
+  font-family: "Staatliches", cursive;
+  font-size: 30px;
+  color: rgba(4, 9, 30, 0.7);
+}
+
+@media only screen and (max-height: 800px) {
   .info {
-    position: relative;
-    width: 100%;
-    background: transparent;
-    display: flex;
+    top: -5%;
   }
-  
-  .game_name {
-    flex-basis: 40%;
-    margin-top: 50px;
-    margin-left: 200px;
-  }
-  
   .first-line {
-    font-family: "Shadows Into Light", cursive;
-    font-size: 100px;
-    font-weight: 50px;
-    text-align: left;
-    color: black;
+    font-size: 80px;
   }
-  
   .second-line {
-    position: relative;
-    font-family: "Just Another Hand", cursive;
-    font-size: 100px;
-    font-weight: 50px;
-    left: 250px;
-    color: rgb(250, 246, 1);
+    left: 100px;
+    font-size: 80px;
   }
-  
-  .description {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    top: 70px;
-    flex-basis: 50%;
-  }
-  
-  .options {
-    display: flex;
-  }
-  
-  .description h2 {
-    margin-left: 50px;
-    font-family: "Shadows Into Light", cursive;
-    font-size: 40px;
-    color: black;
-    cursor: pointer;
-  }
-  
-  .description h2::after {
-    content: "";
-    width: 100%;
-    height: 4px;
-    background: #f44336;
-    display: block;
-    margin: auto;
-  }
-  
-  .details {
-    position: relative;
-    box-sizing: border-box;
-    top: 40px;
-    width: 65%;
-    margin: 10px;
-    left: 40px;
-  }
-  
-  .details p {
-    text-indent: 50px;
-    font-family: "Shadows Into Light";
-    font-size: 20px;
-    color: black;
-  }
-  
   .play {
-    position: relative;
-    top: 175px;
-    width: 40%;
-    height: 50px;
-    left:60%;
-    /* text-align: center; */
+    top: 50px;
   }
-  
-  .playbtn {
-    width: 150px;
-    height: 50px;
-    background: rgb(250, 246, 1);
-    box-shadow: 1px 2px black;
+  .game_name {
+    margin-left: 150px;
+    margin-top: 60px;
   }
-  
-  .playbtn h2 {
-    font-family: "Staatliches", cursive;
+  .details p {
+    font-size: 16px;
+  }
+  .description h2 {
+    font-size: 20px;
+  }
+  .details {
+    top: 0px;
+  }
+}
+
+@media only screen and (max-width: 1100px) and (min-height: 700px) {
+  .info {
+    top: 50px;
+  }
+  .first-line {
+    font-size: 60px;
+  }
+  .second-line {
+    left: 100px;
+    font-size: 60px;
+  }
+  .play {
+    top: 300px;
+  }
+  .game_name {
+    margin-left: 100px;
+  }
+  .description h2 {
+    margin-left: 10%;
+    font-size: 25px;
+  }
+
+  .icon1 {
+    width: 40px;
+    height: 40px;
+  }
+  .icon-img {
+    width: 40px;
+    height: 40px;
+  }
+  .icon2 {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media only screen and (max-width: 400px) and (max-height: 700px) {
+  .first-line {
     font-size: 30px;
-    color: rgba(4, 9, 30, 0.7);
   }
-  
-  @media only screen and (max-height: 800px) {
-    .info {
-      top: -5%;
-    }
-    .first-line {
-      font-size: 80px;
-    }
-    .second-line {
-      left: 100px;
-      font-size: 80px;
-    }
-    .play {
-      top: 50px;
-    }
-    .game_name {
-      margin-left: 150px;
-      margin-top: 60px;
-    }
-    .details p {
-      font-size: 16px;
-    }
-    .description h2 {
-      font-size: 20px;
-    }
-    .details{
-      top:0px;
-    }
+  .game_name {
+    margin-top: 110px;
+    margin-left: 30px;
+    flex-basis: 30%;
   }
-  
-  @media only screen and (max-width: 1100px) and (min-height: 700px) {
-    .info {
-      top: 50px;
-    }
-    .first-line {
-      font-size: 60px;
-    }
-    .second-line {
-      left: 100px;
-      font-size: 60px;
-    }
-    .play {
-      top: 300px;
-    }
-    .game_name {
-      margin-left: 100px;
-    }
-    .description h2 {
-      margin-left: 10%;
-      font-size: 25px;
-    }
-  
-    .icon1 {
-      width: 40px;
-      height: 40px;
-    }
-    .icon-img {
-      width: 40px;
-      height: 40px;
-    }
-    .icon2 {
-      width: 40px;
-      height: 40px;
-    }
+  .description {
+    top: 100px;
+    flex-basis: 60%;
   }
-  
+  .description h2 {
+    font-size: 15px;
+    margin-left: 7%;
+  }
+  .details p {
+    position: relative;
+    text-indent: 10px;
+    font-size: 10px;
+    left: 0px;
+  }
+  .details {
+    left: 0px;
+    width: 95%;
+  }
+  .play {
+    top: 185;
+    left: 50%;
+  }
+  .playbtn {
+    width: 100px;
+    height: 40px;
+  }
+  .playbtn h2 {
+    font-size: 20px;
+  }
+  .icon1 {
+    top: 15%;
+    margin-right: 30px;
+    width: 30px;
+    height: 30px;
+  }
+  .icon-img {
+    width: 30px;
+    height: 30px;
+  }
+  .icon2 {
+    top: 15%;
+    width: 30px;
+    height: 30px;
+  }
+  .header {
+    top: 2%;
+  }
+}

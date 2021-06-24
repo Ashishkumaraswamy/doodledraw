@@ -20,11 +20,11 @@
         <div class="header">
             <div class="icon1">
                 <a href="https://github.com/Ashishkumaraswamy/doodledraw"><img src="{%static 'drawapp/github.png' %}"
-                        alt="" class="icon-img"></a>
+                        alt="" class="icon-img" ></a>
             </div>
             <div class="icon2">
                 <a href="https://socialnetworkatwork.herokuapp.com/"><img src="{%static 'drawapp/logoicon.ico' %}"
-                        alt="" class="icon-img" style="border: 2px solid black;"></a>
+                        alt="" class="icon-img" style="border: 1px solid black;"></a>
             </div>
         </div>
         <div class="info">
@@ -53,11 +53,12 @@
 <script>
     var height = window.innerHeight;
     var width = window.innerWidth;
+    alert(width+' '+height);
     document.getElementById("desc").onclick = () => {
-        document.getElementById("details").innerHTML = "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec vestibulum metus. Mauris eu pellentesque magna. Aenean at quam purus. Pellentesque volutpat leo ut venenatis consequat. Aenean ac est cursus, bibendum sapien sit amet, dapibus enim. Aliquam feugiat maximus lectus, nec sagittis sapien finibus eget. Nulla suscipit enim vitae finibus maximus. Morbi scelerisque laoreet ex. Sed in egestas justo, nec ultrices velit.</p>"
+        document.getElementById("details").innerHTML = "<p>The game rules is easy.You have 40 seconds to draw your doodle for the given category,we use the neural network model to guess yours doodles.You have 6 rounds to complete the game.<br>ALL THE BEST!!</p>"
     }
     document.getElementById("about").onclick = () => {
-        document.getElementById("details").innerHTML = "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec vestibulum metus. Mauris eu pellentesque magna. Aenean at quam purus. Pellentesque volutpat leo ut venenatis consequat. Aenean ac est cursus, bibendum sapien sit amet, dapibus enim. Aliquam feugiat maximus lectus, nec sagittis sapien finibus eget. Nulla suscipit enim vitae finibus maximus. Morbi scelerisque laoreet ex. Sed in egestas justo, nec ultrices velit.</p>"
+        document.getElementById("details").innerHTML = "<p>This game is a replica of Google's Quick Draw.We the creaters of <b>socialnetwork</b> teamed up together again to build this game.This was fun project hope you guys enjoy it!!<br>From the Team<br>Ashish & Mathan.❤</p>"
     }
     document.getElementById("home").onclick = () => {
         document.getElementById("details").innerHTML = "<p>Welcome To the new world of AI...The game guesses the iamge that you draw and awards points simultaneously for correct responses</p>"
