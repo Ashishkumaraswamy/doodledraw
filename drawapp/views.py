@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
-from PIL import Image, ImageOps
+from PIL import Image, ImageOps,ImageCms
 import re
 import io
 import base64
@@ -11,10 +11,8 @@ import numpy as np
 from skimage.transform import resize
 from skimage.io import imread
 import tensorflow as tf
-from tensorflow.keras.models import load_model
-import pickle
 import warnings
-import cv2
+import cv2 as cv2
 warnings.filterwarnings('ignore')
 
 # Create your views here.
