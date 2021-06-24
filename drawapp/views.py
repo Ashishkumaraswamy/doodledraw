@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
-from PIL import Image, ImageOps,ImageCms
+from PIL import Image, ImageOps, ImageCms
 import re
 import io
 import base64
@@ -233,8 +233,8 @@ def inputpreprocessing(img):
 
     # cv2.imshow("image", dst)
     # plt.imshow(dst)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
 
     # create/write to file
     # cv2.imwrite("001.png", dst)
