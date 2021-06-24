@@ -83,7 +83,7 @@
 
   .image{
     width:20%;
-    height: 30%;
+    height: auto;
     position: relative;
     display: flex;
     flex-direction: column;
