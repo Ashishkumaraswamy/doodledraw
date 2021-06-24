@@ -1,146 +1,154 @@
 * {
-    margin: 0;
-  }
-  
-  a {
-    text-decoration: none;
-  }
-  
-  body {
-    background: #ffd139;
-    width: 100vw;
-    height: 100vh;
-  }
-  
-  
-  .number {
-    position: relative;
-    top: 30%;
-    text-align: center;
-    font-family: "Roboto", sans-serif;
-    color: rgb(167, 164, 164);
-    font-weight: 500px;
-    font-size: 20px;
-  }
-  
-  .question {
-    position: relative;
-    width: 100%;
-    height: auto;
-  }
-  
-  .questiontxt {
-    font-family: "Shadows Into Light", cursive;
-    text-align: center;
-    font-size: 40px;
-    font-weight: 500;
-    margin: 40px;
-  }
-  
-  .questionname {
-    position: relative;
-    text-align: center;
-    font-size: 32;
-    font-weight: 1100;
-    font-family: "Kavivanar", cursive;
-    margin: 30px;
-  }
-  
-  .play {
-    position: relative;
-    width: 100%;
-    height: 5%;
-  }
-  
-  
-  .imgcontainer{
-    position: relative;
-    display: -ms-flexbox; /* IE 10 */
-    display: flex;
-    -ms-flex-wrap: wrap; /* IE 10 */
-    flex-wrap: wrap;
-    padding-left: 28%;
-  }
-  .row {
-    position: relative;
-    display: -ms-flexbox;
-    display: flex;
-    flex-direction: row;
-    -ms-flex-wrap: wrap; 
-    flex-wrap: wrap;
-    padding: 0 4px;
-    bottom: 20%;
+  margin: 0;
+}
 
-  }
- 
-  .column {
-    position:relative;
-    -ms-flex: 50%;
-    flex: 30%;
-    /* padding: 0 4px; */
-    display: flex;
-  }
+a {
+  text-decoration: none;
+}
 
-  .image{
-    width:20%;
-    height: auto;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .image h1{
-    position: relative;
-    text-align: center;
-    font-size: 15px;
-    bottom: 5%;
-  }
+body {
+  background: #ffd139;
+  width: 100vw;
+  height: 100vh;
+}
 
-  .image img {
-    position: relative;
-    margin-top: 8px;
-    left:30%;
-    vertical-align: middle;
-    width: 40%;
-    height:auto;
-    margin-bottom: 2%;
-    background: rgb(167, 164, 164);
-    box-shadow: 4px 5px rgb(167, 164, 164);
-    border: 1px rgb(167, 164, 164);
-  }
+.number {
+  position: relative;
+  top: 30%;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  color: rgb(167, 164, 164);
+  font-weight: 500px;
+  font-size: 20px;
+}
 
+.question {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
 
-  .btntext {
-    position: absolute;
-    top: 15%;
-    color: white;
-    left: 10%;
-    font-family: "Roboto", sans-serif;
-    font-size: 20px;
-    font-weight: 600;
-  }
+.questiontxt {
+  font-family: "Shadows Into Light", cursive;
+  text-align: center;
+  font-size: 40px;
+  font-weight: 500;
+  margin: 40px;
+}
 
+.questionname {
+  position: relative;
+  text-align: center;
+  font-size: 32;
+  font-weight: 1100;
+  font-family: "Kavivanar", cursive;
+  margin: 30px;
+}
+
+.play {
+  position: relative;
+  width: 100%;
+  height: 5%;
+}
+
+.imgcontainer {
+  position: relative;
+  display: -ms-flexbox; /* IE 10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE 10 */
+  flex-wrap: wrap;
+  padding-left: 28%;
+}
+.row {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 0 4px;
+  bottom: 20%;
+}
+
+.column {
+  position: relative;
+  -ms-flex: 50%;
+  flex: 30%;
+  /* padding: 0 4px; */
+  display: flex;
+}
+
+.image {
+  width: 20%;
+  height: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.image h1 {
+  position: relative;
+  text-align: center;
+  font-size: 15px;
+  bottom: 5%;
+}
+
+.image img {
+  position: relative;
+  margin-top: 8px;
+  left: 30%;
+  vertical-align: middle;
+  width: 40%;
+  height: auto;
+  margin-bottom: 2%;
+  background: rgb(167, 164, 164);
+  box-shadow: 4px 5px rgb(167, 164, 164);
+  border: 1px rgb(167, 164, 164);
+}
+
+.btntext {
+  position: absolute;
+  top: 15%;
+  color: white;
+  left: 10%;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.playbtn {
+  text-align: center;
+  position: relative;
+  text-align: center;
+  margin-top: 5%;
+  left: 40%;
+  width: 150px;
+  height: 50px;
+  background: #03a703;
+  box-shadow: 2px 5px #028302;
+  border: 1px #028302;
+}
+@media only screen and (min-width: 1000px) {
   .playbtn {
-    text-align: center;
-    position: relative;
-    text-align: center;
-    margin-top: 5%;
-    left: 40%;
-    width: 150px;
-    height: 50px;
-    background: #03a703;
-    box-shadow: 2px 5px #028302;
-    border: 1px #028302;
+    left: 46%;
   }
-  @media only screen and (min-width: 1000px) {
-    .playbtn {
-      left: 46%;
-    }
-    .questiontxt {
-      font-size: 40px;
-    }
-    .questionname {
-      font-size: 42px;
-    }
+  .questiontxt {
+    font-size: 40px;
   }
-  
+  .questionname {
+    font-size: 42px;
+  }
+}
+
+@media only screen and (max-width: 400px) and (max-height: 700px) {
+  .questionname {
+    font-size: 25px;
+  }
+  .questiontxt {
+    font-size: 20px;
+  }
+  .playbtn {
+    top: 70px;
+    left: 30%;
+  }
+}

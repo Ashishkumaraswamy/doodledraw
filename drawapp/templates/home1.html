@@ -24,7 +24,7 @@
             </div>
             <div class="icon2">
                 <a href="https://socialnetworkatwork.herokuapp.com/"><img src="{%static 'drawapp/logoicon.ico' %}"
-                        alt="" class="icon-img" style="border: 1px solid black;"></a>
+                        alt="" class="icon-img" style="border: px solid black;"></a>
             </div>
         </div>
         <div class="info">
@@ -53,7 +53,6 @@
 <script>
     var height = window.innerHeight;
     var width = window.innerWidth;
-    alert(width+' '+height);
     document.getElementById("desc").onclick = () => {
         document.getElementById("details").innerHTML = "<p>The game rules is easy.You have 40 seconds to draw your doodle for the given category,we use the neural network model to guess yours doodles.You have 6 rounds to complete the game.<br>ALL THE BEST!!</p>"
     }
@@ -68,5 +67,4 @@
         location.href = "{%url 'question' %}"
     }
 </script>
-
 </html>
