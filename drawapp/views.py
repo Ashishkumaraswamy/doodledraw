@@ -114,10 +114,9 @@ def get_canvas(request):
         tempimg = io.BytesIO(imgstr)
         im = Image.open(tempimg)
         im = im.convert('RGB')
-        im.save('drawapp\static\drawapp\\temp' +
-                str(request.session['cnt']+1)+'.jpg')
-        im = Image.open('drawapp\static\drawapp\\temp' +
-                        str(request.session['cnt']+1)+'.jpg')
+        path = os.path.join("./drawapp/static/drawapp/", "temp"+str(request.session['cnt']+1)+".jpg")
+        im.save(path)
+        im = Image.open(path)
         cat = classify(im)
         print(cat)
         if cat == request.session["imgques"][-1].lower():
