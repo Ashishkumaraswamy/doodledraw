@@ -245,12 +245,13 @@ a:hover::after {
     font-size: 30px;
   }
   .game_name {
-    margin-top: 100px;
-    margin-left: 40px;
+    margin-top: 110px;
+    margin-left: 30px;
     flex-basis: 30%;
   }
   .description {
-    top: 90px;
+    top: 100px;
+    flex-basis: 60%;
   }
   .description h2 {
     font-size: 15px;
@@ -259,15 +260,16 @@ a:hover::after {
   .details p {
     position: relative;
     text-indent: 10px;
-    font-size: 12px;
+    font-size: 10px;
     left: 0px;
   }
   .details {
     left: 0px;
-    width: 90%;
+    width: 95%;
   }
   .play {
-    left: 55%;
+    top: 185;
+    left: 50%;
   }
   .playbtn {
     width: 100px;
@@ -275,5 +277,23 @@ a:hover::after {
   }
   .playbtn h2 {
     font-size: 20px;
+  }
+  .icon1 {
+    top: 15%;
+    margin-right: 30px;
+    width: 30px;
+    height: 30px;
+  }
+  .icon-img {
+    width: 30px;
+    height: 30px;
+  }
+  .icon2 {
+    top: 15%;
+    width: 30px;
+    height: 30px;
+  }
+  .header {
+    top: 2%;
   }
 }

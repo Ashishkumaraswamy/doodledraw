@@ -80,7 +80,7 @@ body {
   font-weight: 600;
 }
 
-@media only screen and (min-width: 1000px) and (min-height: 800px){
+@media only screen and (min-width: 1000px) and (min-height: 800px) {
   .playbtn {
     left: 46%;
   }
@@ -93,14 +93,23 @@ body {
 }
 
 @media only screen and (max-height: 700px) {
-  .play{
-    top:5%;
-    left:5%;
+  .play {
+    top: 5%;
+    left: 5%;
   }
-  .questiontxt{
+  .questiontxt {
     margin: 25px;
   }
-  .questionname{
-    margin:25px;
+  .questionname {
+    margin: 25px;
+  }
+}
+
+@media only screen and (max-width: 400px) and (max-height: 700px) {
+  .play {
+    left: 0;
+  }
+  .playbtn {
+    left: 30%;
   }
 }
