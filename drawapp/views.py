@@ -59,13 +59,13 @@ def index(request):
     if "imgques" not in request.session:
         request.session["imgques"] = imgques
     if "ans" not in request.session:
-        request.session["ans"] = ans
+        request.session["ans"] = []
     if request.session['cnt'] < 6:
         request.session["cnt"] = -1
         request.session["imgques"] = []
     request.session["cnt"] = -1
     request.session["imgques"] = imgques
-    request.session["ans"] = ans
+    request.session["ans"] = []
     return render(request, "home1.html")
 
 
@@ -124,6 +124,8 @@ def get_canvas(request):
             ans[-1] = 1
             print("Ans", ans)
             return HttpResponse('Oh! I got it. It\'s a '+cat)
+        if cat == '....':
+            return HttpResponse('...')
         return HttpResponse('I guess '+cat)
 
 
