@@ -151,4 +151,8 @@ body {
     top: 70px;
     left: 30%;
   }
+  .image h1 {
+    font-size: 8px;
+    bottom: 5%;
+  }
 }

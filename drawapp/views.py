@@ -114,7 +114,8 @@ def get_canvas(request):
         tempimg = io.BytesIO(imgstr)
         im = Image.open(tempimg)
         im = im.convert('RGB')
-        path = os.path.join("./drawapp/static/drawapp/", "temp"+str(request.session['cnt']+1)+".jpg")
+        path = os.path.join("./drawapp/static/drawapp/",
+                            "temp"+str(request.session['cnt']+1)+".jpg")
         im.save(path)
         im = Image.open(path)
         cat = classify(im)
@@ -135,52 +136,15 @@ def predictimage(im):
     model = tf.keras.models.load_model(os.path.join("./drawapp/", "keras.h5"))
     image_size = 28
     imgcrop = inputpreprocessing(im)
-    if imgcrop.size == 0:
+    if imgcrop == '....':
         return '....'
     x = imgcrop
     x = x.reshape(image_size, image_size, 1).astype('float32')
     x = x*3
-    pred = model.predict(np.expand_dims(x, axis=0))[0]
+    pred = np.array(model(np.expand_dims(x, axis=0))[0])
     ind = (-pred).argsort()[:5]
     latex = [gamecat[i] for i in ind]
     return latex[0]
-
-
-# def cropimage(im):
-#     im = ImageOps.grayscale(im)
-#     im = np.array(im)
-#     im = np.where(im == 255, 0, im)
-#     im = np.where(im != 0, 255-im, im)
-#     imagedim = []
-#     start = []
-#     maxwidth = 0
-#     startrow = -1
-#     endrow = -1
-#     for i in range(im.shape[0]):
-#         listrow = []
-#         for j in range(im.shape[1]):
-#             if im[i][j] != 0:
-#                 listrow = im[i, j:].tolist()
-#                 start.append(j)
-#                 break
-#         for k in range(len(listrow)-1, 0, -1):
-#             if listrow[k] != 0:
-#                 listrow = listrow[:k+1]
-#                 if len(listrow) != 0:
-#                     if start[-1]+len(listrow) > maxwidth:
-#                         maxwidth = start[-1]+len(listrow)
-#                     if len(imagedim) == 0:
-#                         startrow = i
-#                     endrow = i
-#                     imagedim.append(listrow)
-#                 break
-#     imgcrop = np.array([])
-#     try:
-#         min_start = np.min(start)
-#         imgcrop = im[startrow-50:endrow+50, min_start-50:maxwidth+50]
-#     except ValueError as e:
-#         pass
-#     return imgcrop
 
 
 def printarray2d(x):
@@ -221,7 +185,10 @@ def inputpreprocessing(img):
     # (3) Find the max-area contour
     cnts = cv2.findContours(morphed, cv2.RETR_EXTERNAL,
                             cv2.CHAIN_APPROX_SIMPLE)[-2]
-    cnt = sorted(cnts, key=cv2.contourArea)[-1]
+    try:
+        cnt = sorted(cnts, key=cv2.contourArea)[-1]
+    except IndexError as e:
+        return '....'
 
     # (4) Crop and save it
     x, y, w, h = cv2.boundingRect(cnt)
