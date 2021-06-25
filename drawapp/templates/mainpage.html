@@ -51,6 +51,8 @@
     canvas.setAttribute('width', canvas.parentNode.offsetWidth);
     canvas.setAttribute('height', canvas.parentNode.offsetHeight);
     var ctx = canvas.getContext('2d');
+    var snd = new Audio("{% static 'drawapp/clock.mp3' %}");
+    
     resize();
 
     // last known position
@@ -132,6 +134,7 @@
         timer=timer-1
         if(timer<0)
         {
+            snd.pause();
             clearInterval(x);
             clearInterval(y);
             var msg = new SpeechSynthesisUtterance('Sorry I couldn\'t guess it');
@@ -140,6 +143,10 @@
             // localStorage.setItem('image',"");
             // localStorage.setItem('timer',10);
             setTimeout(() => { location.href="{%url 'question' %}"; }, 3000);  
+        }else if(timer == 3)
+        {
+            snd.play();
+
         }
         $("form1").submit(function(){
         alert("Submitted");
