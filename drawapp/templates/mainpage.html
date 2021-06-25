@@ -158,8 +158,11 @@
                 success:function(text){
                     console.log(text);
                     var message = text;
-                    var msg = new SpeechSynthesisUtterance(message);
-                    window.speechSynthesis.speak(msg);  
+                    if(text!=='...')
+                    {
+                        var msg = new SpeechSynthesisUtterance(message);
+                        window.speechSynthesis.speak(msg);
+                    }  
                     document.getElementById("guessbox").innerHTML="<p>"+message+"<p>";
 
                     if(text.slice(0,3)=='Oh!')
