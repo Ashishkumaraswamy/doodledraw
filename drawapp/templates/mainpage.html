@@ -17,7 +17,8 @@
         <form id="form1">
             {% csrf_token %}
             <div class="body_item" id="body_item">
-                <canvas id="canvas" resize="true" >
+                <canvas id="canvas" resize="true">
+                    
                 </canvas>
             </div>
             <input type="hidden" name="captured_image" id="captured_image">
@@ -67,7 +68,7 @@
     function setPositiontouch(e) {
     try {
         pos.x = e.touches[0].pageX;
-        pos.y = e.touches[0].pageY - 75;
+        pos.y = e.touches[0].pageY;
     } catch (error) {
         
         // expected output: ReferenceError: nonExistentFunction is not defined
@@ -78,16 +79,16 @@
 
     // new position from mouse event
     function setPosition(e) {
-    pos.x = e.clientX ;
-    pos.y = e.clientY - 75;
+    pos.x = e.clientX;
+    pos.y = e.clientY;
         }
 
     // resize canvas
     function resize() {
     ctx.canvas.width = window.innerWidth;
-    ctx.canvas.height = window.innerHeight-75;
+    ctx.canvas.height = window.innerHeight;
     ctx.fillStyle = "white";
-    ctx.fillRect(0, 75, ctx.canvas.width, ctx.canvas.height);
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     }
     
     function drawtouch(e) {
