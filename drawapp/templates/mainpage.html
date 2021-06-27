@@ -53,7 +53,6 @@
     canvas.setAttribute('height', canvas.parentNode.offsetHeight);
     var ctx = canvas.getContext('2d');
     var snd = new Audio("{% static 'drawapp/clock.mp3' %}");
-    localStorage.setItem("timer", 40);
     resize();
 
     // last known position
