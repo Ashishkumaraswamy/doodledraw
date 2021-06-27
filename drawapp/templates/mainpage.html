@@ -32,8 +32,8 @@
             </div>
             <div class="icon">
                 <i class='fa fa-eraser' id="eraser"></i>
-                <i class="fa fa-pause" ></i>
-                <i class="fa fa-close"></i>
+                <i class="fa fa-pause" id="pause" value="pause" onclick="pausebtn()"></i>
+                <a href="{%url 'index' %}"><i class="fa fa-close"></i></a>
             </div>
         </div>       
         <div class="text_item" id="text_item">
@@ -47,12 +47,13 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script>
     var timer=40;
+    var temp;
     const canvas = document.querySelector('#canvas');
     canvas.setAttribute('width', canvas.parentNode.offsetWidth);
     canvas.setAttribute('height', canvas.parentNode.offsetHeight);
     var ctx = canvas.getContext('2d');
     var snd = new Audio("{% static 'drawapp/clock.mp3' %}");
-    
+    localStorage.setItem("timer", 40);
     resize();
 
     // last known position
@@ -67,6 +68,7 @@
     document.addEventListener('touchstart', setPositiontouch);
     document.addEventListener('touchend', setPositiontouch);
 
+
     function setPositiontouch(e) {
     try {
         pos.x = e.touches[0].pageX;
@@ -78,6 +80,38 @@
     }
     
     }
+
+    function pausebtn(){
+        if(document.getElementById("pause").className == "fa fa-pause")
+        {
+            clearInterval(x);
+            clearInterval(y);
+            
+            document.removeEventListener('mousemove', draw);
+            document.removeEventListener('mousedown', setPosition);
+            document.removeEventListener('mouseup', setPosition);
+
+            document.removeEventListener('touchmove', drawtouch);
+            document.removeEventListener('touchstart', setPositiontouch);
+            document.removeEventListener('touchend', setPositiontouch);
+            document.getElementById("pause").className = "fa fa-play";
+        }
+        else{
+            
+            document.addEventListener('mousemove', draw);
+            document.addEventListener('mousedown', setPosition);
+            document.addEventListener('mouseup', setPosition);
+
+            document.addEventListener('touchmove', drawtouch);
+            document.addEventListener('touchstart', setPositiontouch);
+            document.addEventListener('touchend', setPositiontouch);
+            document.getElementById("pause").className = "fa fa-pause";
+            gamework();
+            timerclock();
+            
+        }
+    }
+
 
     // new position from mouse event
     function setPosition(e) {
@@ -122,66 +156,75 @@
     }
     
     var form=document.getElementById('form1');
+    var x;
+    var y;
+    function timerclock() {
+            x=setInterval(function(e,tim){
+            tim = timer
+            if (timer>=10){
+                document.getElementById("timer").innerHTML="<h1>00:"+timer+"</h1>";
+            }
+            else
+            {
+                document.getElementById("timer").innerHTML="<h1>00:0"+timer+"</h1>";
+            }
+            timer=timer-1
+            if(timer<0)
+            {
+                snd.pause();
+                clearInterval(x);
+                clearInterval(y);
+                var msg = new SpeechSynthesisUtterance('Sorry I couldn\'t guess it');
+                window.speechSynthesis.speak(msg);  
+                document.getElementById("timer").innerHTML="<h1>TIME UP!</h1>";
+                // localStorage.setItem('image',"");
+                // localStorage.setItem('timer',10);
+                setTimeout(() => { location.href="{%url 'question' %}"; }, 3000);  
+            }else if(timer == 3)
+            {
+                snd.play();
 
-    var x=setInterval(function(e){
-        if (timer>=10){
-            document.getElementById("timer").innerHTML="<h1>00:"+timer+"</h1>";
+            }
+            $("form1").submit(function(){
+            alert("Submitted");
+            });
         }
-        else
-        {
-            document.getElementById("timer").innerHTML="<h1>00:0"+timer+"</h1>";
-        }
-        timer=timer-1
-        if(timer<0)
-        {
-            snd.pause();
-            clearInterval(x);
-            clearInterval(y);
-            var msg = new SpeechSynthesisUtterance('Sorry I couldn\'t guess it');
-            window.speechSynthesis.speak(msg);  
-            document.getElementById("timer").innerHTML="<h1>TIME UP!</h1>";
-            // localStorage.setItem('image',"");
-            // localStorage.setItem('timer',10);
-            setTimeout(() => { location.href="{%url 'question' %}"; }, 3000);  
-        }else if(timer == 3)
-        {
-            snd.play();
-
-        }
-        $("form1").submit(function(){
-        alert("Submitted");
-        });
+        ,1000)
+        
     }
-    ,1000)
-    var y=setInterval(function(e){  
-        document.getElementById('captured_image').value = canvas.toDataURL('image/png');
-            $.ajax({
-                type:'POST',
-                url:'/input',
-                data:{
-                    canvas_data:$("#captured_image").val(),
-                    csrfmiddlewaretoken: '{{ csrf_token }}'
-                },
-                success:function(text){
-                    console.log(text);
-                    var message = text;
-                    if(text!=='...')
-                    {
-                        var msg = new SpeechSynthesisUtterance(message);
-                        window.speechSynthesis.speak(msg);
-                    }  
-                    document.getElementById("guessbox").innerHTML="<p>"+message+"<p>";
+    function gamework() {
+        y=setInterval(function(e){  
+            document.getElementById('captured_image').value = canvas.toDataURL('image/png');
+                $.ajax({
+                    type:'POST',
+                    url:'/input',
+                    data:{
+                        canvas_data:$("#captured_image").val(),
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    success:function(text){
+                        console.log(text);
+                        var message = text;
+                        if(text!=='...')
+                        {
+                            var msg = new SpeechSynthesisUtterance(message);
+                            window.speechSynthesis.speak(msg);
+                        }  
+                        document.getElementById("guessbox").innerHTML="<p>"+message+"<p>";
 
-                    if(text.slice(0,3)=='Oh!')
-                    {
-                        clearInterval(y);
-                        clearInterval(x);
-                        setTimeout(() => { location.href="{%url 'question' %}"; }, 5000);  
+                        if(text.slice(0,3)=='Oh!')
+                        {
+                            clearInterval(y);
+                            clearInterval(x);
+                            setTimeout(() => { location.href="{%url 'question' %}"; }, 5000);  
+                        }
                     }
-                }
-            })
-        }
-    ,1500)
+                })
+            }
+        ,1500)
+    }
+    gamework();
+    timerclock();
 
     document.getElementById("eraser").onclick=()=>{
         context=canvas.getContext('2d');
