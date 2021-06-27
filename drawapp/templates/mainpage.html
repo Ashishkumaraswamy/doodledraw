@@ -33,7 +33,7 @@
             <div class="icon">
                 <i class='fa fa-eraser' id="eraser"></i>
                 <i class="fa fa-pause" id="pause" value="pause" onclick="pausebtn()"></i>
-                <a href="{%url 'index' %}"><i class="fa fa-close"></i></a>
+                <i class="fa fa-close" id="close"></i>
             </div>
         </div>       
         <div class="text_item" id="text_item">
@@ -231,6 +231,10 @@
         ctx.canvas.height = window.innerHeight;
         ctx.fillStyle = "white";
         ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    }
+
+    document.getElementById("close").onclick=()=>{
+        location.href="{%url 'index' %}";
     }
 
     </script>
