@@ -26,8 +26,7 @@
 
     <div class="question">
         <h1 class="questionname">WOW Well Done!</h1>
-        <h1 class="questiontxt">Our neural network model was able to guess {{score}} out of 6 doodles.<br>So see your
-            result how you did your doodles</h1>
+        <h1 class="questiontxt" id="questiontxt"></h1>
     </div>
     <div class="imgcontainer">
         <div class="row">
@@ -71,8 +70,8 @@
     </div>
 </body>
 <script>
-    //alert(window.innerHeight +" "+ window.innerWidth)
-    alert({ans});
+    var temp = localStorage.getItem("score");
+    document.getElementById("questiontxt").innerHTML = "Our neural network model was able to guess "+temp+" out of 6 doodles.<br>So see your result how you did your doodles";
 </script>
 
 </html>

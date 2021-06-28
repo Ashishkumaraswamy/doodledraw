@@ -123,7 +123,7 @@ def get_canvas(request):
         if cat == request.session["imgques"][-1].lower():
             ans[-1] = 1
             print("Ans", ans)
-            return HttpResponse('Oh! I got it. It\'s a '+cat)
+            return HttpResponse('1Oh! I got it. It\'s a '+cat)
         if cat == '....':
             return HttpResponse('...')
         return HttpResponse('I guess '+cat)

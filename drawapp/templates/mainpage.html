@@ -66,7 +66,7 @@
     document.addEventListener('touchmove', drawtouch);
     document.addEventListener('touchstart', setPositiontouch);
     document.addEventListener('touchend', setPositiontouch);
-
+    
 
     function setPositiontouch(e) {
     try {
@@ -204,15 +204,29 @@
                     success:function(text){
                         console.log(text);
                         var message = text;
+                        if(text.slice(0,4) =='1Oh!')
+                        {
+                            var res = text.slice(0, 1);
+                            console.log(localStorage.getItem("score"));
+                            console.log(res);
+                            var ans = parseInt(res)+parseInt(localStorage.getItem("score"));
+                            localStorage.setItem("score",ans);
+                            console.log(localStorage.getItem("score"));
+                            var n = text.length;
+                            text = text.slice(1, n);
+                            message = text;
+                            console.log(text+"  "+message);
+                        }
                         if(text!=='...')
                         {
                             var msg = new SpeechSynthesisUtterance(message);
                             window.speechSynthesis.speak(msg);
-                        }  
-                        document.getElementById("guessbox").innerHTML="<p>"+message+"<p>";
+                        }
 
+                        document.getElementById("guessbox").innerHTML="<p>"+message+"<p>";
                         if(text.slice(0,3)=='Oh!')
                         {
+                            
                             clearInterval(y);
                             clearInterval(x);
                             setTimeout(() => { location.href="{%url 'question' %}"; }, 5000);  
