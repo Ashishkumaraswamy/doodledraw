@@ -1,4 +1,4 @@
-# doodledraw
+# Doodledraw
 
 # some of the preview images from the website
 ![Screenshot (544)](https://user-images.githubusercontent.com/62739618/130173303-78748ac9-3d04-48c7-96ff-61935206479f.png)
