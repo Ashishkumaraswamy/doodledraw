@@ -1,5 +1,7 @@
 # Doodledraw
 
+●	DoodleDraw, a web application game built using Django Framework, that predicts the drawings of the user drawn on the painting canvas in real time, using a CNN model in the backend. The player is awarded a point if his/her drawing matches the question provided by the application.
+
 # Some of the preview images from the website
 ![Screenshot (544)](https://user-images.githubusercontent.com/62739618/130173303-78748ac9-3d04-48c7-96ff-61935206479f.png)
 **************************************************************************************************************************
