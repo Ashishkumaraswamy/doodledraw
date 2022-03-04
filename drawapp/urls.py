@@ -8,6 +8,5 @@ urlpatterns = [
     path("game", views.game, name="game"),
     path("question", views.question, name="question"),
     path("result", views.result, name="result"),
-
     url(r'^input$', views.get_canvas)
 ]
