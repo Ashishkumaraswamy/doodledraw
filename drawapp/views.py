@@ -119,6 +119,7 @@ def get_canvas(request):
         im.save(path)
         im = Image.open(path)
         cat = classify(im)
+        im.close()
         print(cat)
         if cat == request.session["imgques"][-1].lower():
             ans[-1] = 1
