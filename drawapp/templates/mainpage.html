@@ -1,52 +1,59 @@
 {%load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <link href="{%static 'drawapp/mainpage.css' %}" rel="stylesheet" >
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Exo:wght@600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="icon" type="image/png" href="{%static 'drawapp/icon.ico' %}"/>
-        <link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&family=Merriweather:wght@300&family=Staatliches&display=swap" rel="stylesheet">
-        <title>Game</title>
-    </head>
-    <body>
-        <form id="form1">
-            {% csrf_token %}
-            <div class="body_item" id="body_item">
-                <canvas id="canvas" resize="true">
-                    
-                </canvas>
-            </div>
-            <input type="hidden" name="captured_image" id="captured_image">
-        </form>
-        <!-- 
-        try commenting this run that da -->
-        <div class="header_item" id="header_item">
-            <h1 id="question">DRAW : {{imgques}}</h1>
-            <div class="timer" id="timer"> 
-                <h1>00:00</h1>
-            </div>
-            <div class="icon">
-                <i class='fa fa-eraser' id="eraser"></i>
-                <i class="fa fa-pause" id="pause" value="pause" onclick="pausebtn()"></i>
-                <i class="fa fa-close" id="close"></i>
-            </div>
-        </div>       
-        <div class="text_item" id="text_item">
-            <div class="guessbox" id="guessbox">
-            <p> ... <p>
-            </div>
-        </div>
-        
-    </body>
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script>
-    var timer=40;
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="{%static 'drawapp/mainpage.css' %}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" href="{%static 'drawapp/icon.ico' %}" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&family=Merriweather:wght@300&family=Staatliches&display=swap"
+        rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <title>Game</title>
+</head>
+
+<body>
+    <form id="form1">
+        {% csrf_token %}
+        <div class="body_item" id="body_item">
+            <canvas id="canvas" resize="true">
+
+            </canvas>
+        </div>
+        <input type="hidden" name="captured_image" id="captured_image">
+    </form>
+    <!-- 
+        try commenting this run that da -->
+    <div class="header_item" id="header_item">
+        <h1 id="question">DRAW : {{imgques}}</h1>
+        <div class="timer" id="timer">
+            <h1>00:00</h1>
+        </div>
+        <div class="icon">
+            <i class='fa fa-eraser' id="eraser"></i>
+            <i class="fa fa-pause" id="pause" value="pause" onclick="pausebtn()"></i>
+            <i class="fa fa-close" id="close"></i>
+        </div>
+    </div>
+    <div class="text_item" id="text_item">
+        <div class="guessbox" id="guessbox">
+            <p> ...
+            <p>
+        </div>
+    </div>
+
+</body>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script>
+    var timer = 40;
     var temp;
     const canvas = document.querySelector('#canvas');
     canvas.setAttribute('width', canvas.parentNode.offsetWidth);
@@ -62,30 +69,29 @@
     document.addEventListener('mousemove', draw);
     document.addEventListener('mousedown', setPosition);
     document.addEventListener('mouseup', setPosition);
-    
+
     document.addEventListener('touchmove', drawtouch);
     document.addEventListener('touchstart', setPositiontouch);
     document.addEventListener('touchend', setPositiontouch);
-    
+
 
     function setPositiontouch(e) {
-    try {
-        pos.x = e.touches[0].pageX;
-        pos.y = e.touches[0].pageY;
-    } catch (error) {
-        
-        // expected output: ReferenceError: nonExistentFunction is not defined
-         // Note - error messages will vary depending on browser
-    }
-    
+        try {
+            pos.x = e.touches[0].pageX;
+            pos.y = e.touches[0].pageY;
+        } catch (error) {
+
+            // expected output: ReferenceError: nonExistentFunction is not defined
+            // Note - error messages will vary depending on browser
+        }
+
     }
 
-    function pausebtn(){
-        if(document.getElementById("pause").className == "fa fa-pause")
-        {
+    function pausebtn() {
+        if (document.getElementById("pause").className == "fa fa-pause") {
             clearInterval(x);
             clearInterval(y);
-            
+
             document.removeEventListener('mousemove', draw);
             document.removeEventListener('mousedown', setPosition);
             document.removeEventListener('mouseup', setPosition);
@@ -95,8 +101,8 @@
             document.removeEventListener('touchend', setPositiontouch);
             document.getElementById("pause").className = "fa fa-play";
         }
-        else{
-            
+        else {
+
             document.addEventListener('mousemove', draw);
             document.addEventListener('mousedown', setPosition);
             document.addEventListener('mouseup', setPosition);
@@ -107,149 +113,144 @@
             document.getElementById("pause").className = "fa fa-pause";
             gamework();
             timerclock();
-            
+
         }
     }
 
 
     // new position from mouse event
     function setPosition(e) {
-    pos.x = e.clientX;
-    pos.y = e.clientY;
-        }
+        pos.x = e.clientX;
+        pos.y = e.clientY;
+    }
 
     // resize canvas
     function resize() {
-    ctx.canvas.width = window.innerWidth;
-    ctx.canvas.height = window.innerHeight;
-    ctx.fillStyle = "white";
-    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    }
-    
-    function drawtouch(e) {
-    ctx.beginPath(); // begin
-    ctx.lineWidth = 7;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = "black";
-
-    ctx.moveTo(pos.x, pos.y); // from
-    setPositiontouch(e)
-    ctx.lineTo(pos.x, pos.y); // to
-    ctx.stroke(); // draw it!
-    }
-
-    function draw(e) {
-    // mouse left button must be pressed
-    if (e.buttons !== 1) return;
-
-    ctx.beginPath(); // begin
-
-    ctx.lineWidth = 7;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = "black";
-
-    ctx.moveTo(pos.x, pos.y); // from
-    setPosition(e);
-    ctx.lineTo(pos.x, pos.y); // to
-    ctx.stroke(); // draw it!
-    }
-    
-    var form=document.getElementById('form1');
-    var x;
-    var y;
-    function timerclock() {
-            x=setInterval(function(e,tim){
-            tim = timer
-            if (timer>=10){
-                document.getElementById("timer").innerHTML="<h1>00:"+timer+"</h1>";
-            }
-            else
-            {
-                document.getElementById("timer").innerHTML="<h1>00:0"+timer+"</h1>";
-            }
-            timer=timer-1
-            if(timer<0)
-            {
-                snd.pause();
-                clearInterval(x);
-                clearInterval(y);
-                var msg = new SpeechSynthesisUtterance('Sorry I couldn\'t guess it');
-                window.speechSynthesis.speak(msg);  
-                document.getElementById("timer").innerHTML="<h1>TIME UP!</h1>";
-                // localStorage.setItem('image',"");
-                // localStorage.setItem('timer',10);
-                setTimeout(() => { location.href="{%url 'question' %}"; }, 3000);  
-            }else if(timer == 3)
-            {
-                snd.play();
-
-            }
-            $("form1").submit(function(){
-            alert("Submitted");
-            });
-        }
-        ,1000)
-        
-    }
-    function gamework() {
-        y=setInterval(function(e){  
-            document.getElementById('captured_image').value = canvas.toDataURL('image/png');
-                $.ajax({
-                    type:'POST',
-                    url:'/input',
-                    data:{
-                        canvas_data:$("#captured_image").val(),
-                        csrfmiddlewaretoken: '{{ csrf_token }}'
-                    },
-                    success:function(text){
-                        console.log(text);
-                        var message = text;
-                        if(text.slice(0,4) =='1Oh!')
-                        {
-                            var res = text.slice(0, 1);
-                            console.log(localStorage.getItem("score"));
-                            console.log(res);
-                            var ans = parseInt(res)+parseInt(localStorage.getItem("score"));
-                            localStorage.setItem("score",ans);
-                            console.log(localStorage.getItem("score"));
-                            var n = text.length;
-                            text = text.slice(1, n);
-                            message = text;
-                            console.log(text+"  "+message);
-                        }
-                        if(text!=='...')
-                        {
-                            var msg = new SpeechSynthesisUtterance(message);
-                            window.speechSynthesis.speak(msg);
-                        }
-
-                        document.getElementById("guessbox").innerHTML="<p>"+message+"<p>";
-                        if(text.slice(0,3)=='Oh!')
-                        {
-                            
-                            clearInterval(y);
-                            clearInterval(x);
-                            setTimeout(() => { location.href="{%url 'question' %}"; }, 5000);  
-                        }
-                    }
-                })
-            }
-        ,1500)
-    }
-    gamework();
-    timerclock();
-
-    document.getElementById("eraser").onclick=()=>{
-        context=canvas.getContext('2d');
         ctx.canvas.width = window.innerWidth;
         ctx.canvas.height = window.innerHeight;
         ctx.fillStyle = "white";
         ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     }
 
-    document.getElementById("close").onclick=()=>{
-        location.href="{%url 'index' %}";
+    function drawtouch(e) {
+        ctx.beginPath(); // begin
+        ctx.lineWidth = 7;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = "black";
+
+        ctx.moveTo(pos.x, pos.y); // from
+        setPositiontouch(e)
+        ctx.lineTo(pos.x, pos.y); // to
+        ctx.stroke(); // draw it!
     }
 
-    </script>
+    function draw(e) {
+        // mouse left button must be pressed
+        if (e.buttons !== 1) return;
+
+        ctx.beginPath(); // begin
+
+        ctx.lineWidth = 7;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = "black";
+
+        ctx.moveTo(pos.x, pos.y); // from
+        setPosition(e);
+        ctx.lineTo(pos.x, pos.y); // to
+        ctx.stroke(); // draw it!
+    }
+
+    var form = document.getElementById('form1');
+    var x;
+    var y;
+    function timerclock() {
+        x = setInterval(function (e, tim) {
+            tim = timer
+            if (timer >= 10) {
+                document.getElementById("timer").innerHTML = "<h1>00:" + timer + "</h1>";
+            }
+            else {
+                document.getElementById("timer").innerHTML = "<h1>00:0" + timer + "</h1>";
+            }
+            timer = timer - 1
+            if (timer < 0) {
+                snd.pause();
+                clearInterval(x);
+                clearInterval(y);
+                var msg = new SpeechSynthesisUtterance('Sorry I couldn\'t guess it');
+                window.speechSynthesis.speak(msg);
+                document.getElementById("timer").innerHTML = "<h1>TIME UP!</h1>";
+                // localStorage.setItem('image',"");
+                // localStorage.setItem('timer',10);
+                setTimeout(() => { location.href = "{%url 'question' %}"; }, 3000);
+            } else if (timer == 3) {
+                snd.play();
+
+            }
+            $("form1").submit(function () {
+                alert("Submitted");
+            });
+        }
+            , 1000)
+
+    }
+    function gamework() {
+        y = setInterval(function (e) {
+            document.getElementById('captured_image').value = canvas.toDataURL('image/png');
+            $.ajax({
+                type: 'POST',
+                url: '/input',
+                data: {
+                    canvas_data: $("#captured_image").val(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function (text) {
+                    console.log(text);
+                    var message = text;
+                    if (text.slice(0, 4) == '1Oh!') {
+                        var res = text.slice(0, 1);
+                        console.log(localStorage.getItem("score"));
+                        console.log(res);
+                        var ans = parseInt(res) + parseInt(localStorage.getItem("score"));
+                        localStorage.setItem("score", ans);
+                        console.log(localStorage.getItem("score"));
+                        var n = text.length;
+                        text = text.slice(1, n);
+                        message = text;
+                        console.log(text + "  " + message);
+                    }
+                    if (text !== '...') {
+                        var msg = new SpeechSynthesisUtterance(message);
+                        window.speechSynthesis.speak(msg);
+                    }
+
+                    document.getElementById("guessbox").innerHTML = "<p>" + message + "<p>";
+                    if (text.slice(0, 3) == 'Oh!') {
+
+                        clearInterval(y);
+                        clearInterval(x);
+                        setTimeout(() => { location.href = "{%url 'question' %}"; }, 5000);
+                    }
+                }
+            })
+        }
+            , 1500)
+    }
+    gamework();
+    timerclock();
+
+    document.getElementById("eraser").onclick = () => {
+        context = canvas.getContext('2d');
+        ctx.canvas.width = window.innerWidth;
+        ctx.canvas.height = window.innerHeight;
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    }
+
+    document.getElementById("close").onclick = () => {
+        location.href = "{%url 'index' %}";
+    }
+
+</script>
+
 </html>
