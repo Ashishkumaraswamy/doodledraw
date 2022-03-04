@@ -107,8 +107,10 @@ def question(request):
 def get_canvas(request):
     global imgques
     global ans
+    print("Here")
     if request.method == "POST":
         captured_image = request.POST['canvas_data']
+        print("Captured")
         imgstr = re.search('base64,(.*)', captured_image).group(1)
         imgstr = base64.b64decode(imgstr)
         tempimg = io.BytesIO(imgstr)
@@ -117,6 +119,7 @@ def get_canvas(request):
         path = os.path.join("./drawapp/static/drawapp/",
                             "temp"+str(request.session['cnt']+1)+".jpg")
         im.save(path)
+        print("Saved")
         im = Image.open(path)
         cat = classify(im)
         im.close()
