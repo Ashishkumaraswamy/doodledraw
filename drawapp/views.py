@@ -107,7 +107,6 @@ def question(request):
 def get_canvas(request):
     global imgques
     global ans
-    print("Here")
     if request.method == "POST":
         captured_image = request.POST['canvas_data']
         print("Captured")
